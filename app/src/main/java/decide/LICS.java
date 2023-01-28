@@ -1,63 +1,63 @@
 package decide;
 
 public class LICS {
-	boolean zero(InputVariables globals) {
+	static boolean zero(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean one(InputVariables globals) {
+	static boolean one(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean two(InputVariables globals) {
+	static boolean two(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean three(InputVariables globals) {
+	static boolean three(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean four(InputVariables globals) {
+	static boolean four(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean five(InputVariables globals) {
+	static boolean five(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean six(InputVariables globals) {
+	static boolean six(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean seven(InputVariables globals) {
+	static boolean seven(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean eight(InputVariables globals) {
+	static boolean eight(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean nine(InputVariables globals) {
+	static boolean nine(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean ten(InputVariables globals) {
+	static boolean ten(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean eleven(InputVariables globals) {
+	static boolean eleven(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean twelve(InputVariables globals) {
+	static boolean twelve(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean thirteen(InputVariables globals) {
+	static boolean thirteen(InputVariables globals, Parameters params) {
 		return false;
 	}
 
-	boolean fourteen(InputVariables globals) {
+	static boolean fourteen(InputVariables globals, Parameters params) {
 		return false;
 	}
 
