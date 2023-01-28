@@ -58,7 +58,21 @@ public class LICS {
 		return false;
 	}
 
+	/**
+	 * Returns true if there exists two poins in array POINTS in globals
+	 * separated by G_PTS points such that the difference in x values of a 
+	 * point and the prior to it is negative.
+	 * 
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean eleven(InputVariables globals, Parameters params) {
+		if (globals.NUMPOINTS < 3 || params.G_PTS < 1 || globals.NUMPOINTS < params.G_PTS) return false;
+		for(int i = 0; i < globals.POINTS.length - 1 - params.G_PTS; i++){
+			if(globals.POINTS[i + params.G_PTS + 1].x - globals.POINTS[i].x < 0)
+				return true;
+		}
 		return false;
 	}
 
