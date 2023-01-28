@@ -1,10 +1,9 @@
 package decide;
 
 public class Point {
-	double x, y, z;
-	Point(double x, double y, double z) {
+	double x, y;
+	Point(double x, double y) {
 		this.x = x;
 		this.y = y;
-		this.z = z;
 	}
 }
