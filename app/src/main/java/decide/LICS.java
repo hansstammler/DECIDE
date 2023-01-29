@@ -1,5 +1,7 @@
 package decide;
 
+import java.util.ArrayList;
+
 public class LICS {
 	static boolean zero(InputVariables globals, Parameters params) {
 		return false;
@@ -13,31 +15,21 @@ public class LICS {
 	 */
 
 	static boolean one(InputVariables globals, Parameters params) {
-
 		if (globals.NUMPOINTS < 3) {
 			return false;
 		}
-
-		for (int i = 0; i + 2 < globals.NUMPOINTS; i += 3) {
-			Point a  = globals.POINTS[i];
-			Point b = globals.POINTS[i+1];
-			Point c = globals.POINTS[i+2];
-			
-			for (Point m : new Point[]{a, b, c}) {
-				Point aa = new Point(a.x - m.x, a.y-m.y);
-				Point bb = new Point(b.x - m.x, b.y-m.y);
-				Point cc = new Point(c.x - m.x, c.y-m.y);
-
-				for (Point x: new Point[]{aa, bb, cc}) {
-					if (Math.pow(x.x, 2) + Math.pow(x.y, 2) > Math.pow(params.RADIUS1, 2)) {
-						return false;
-					}
-				}
-				return true;
+		boolean could_bound = true;
+		for (int i = 0; i + 2 < globals.NUMPOINTS && could_bound; i+= 3) {
+			ArrayList<Point> points = new ArrayList<Point>();
+			for (int j = 0; j < 3; j++) {
+				points.add(globals.POINTS[i+j]);
 			}
+			/* This function uses an implementation for the bounding circle problem because that is nontrivial. */
+			Circle cir = SmallestEnclosingCircle.makeCircle(points);
+			could_bound &= cir.r <= params.RADIUS1;
 		}
 
-		return false;
+		return !could_bound;
 	}
 
 	static boolean two(InputVariables globals, Parameters params) {
@@ -81,26 +73,22 @@ public class LICS {
 		if (globals.NUMPOINTS < 5) {
 			return false;
 		}
+		boolean could_bound = true;
 		for (int i = 0; i + params.A_PTS + params.B_PTS + 1 < globals.POINTS.length; i++){
 			Point a = globals.POINTS[i];
 			Point b = globals.POINTS[i+params.A_PTS + 1];
 			Point c = globals.POINTS[i+params.A_PTS+params.B_PTS + 2];
 			
-			for (Point m : new Point[]{a, b, c}) {
-				Point aa = new Point(a.x - m.x, a.y-m.y);
-				Point bb = new Point(b.x - m.x, b.y-m.y);
-				Point cc = new Point(c.x - m.x, c.y-m.y);
-
-				for (Point x: new Point[]{aa, bb, cc}) {
-					if (Math.pow(x.x, 2) + Math.pow(x.y, 2) > Math.pow(params.RADIUS1, 2)) {
-						return false;
-					}
-				}
-				return true;
-			}
+			ArrayList<Point> points = new ArrayList<Point>();
+			points.add(a);
+			points.add(b);
+			points.add(c);
+			/* This function uses an implementation for the bounding circle problem because that is nontrivial. */
+			Circle cir = SmallestEnclosingCircle.makeCircle(points);
+			could_bound &= cir.r <= params.RADIUS1;
 		}
 		
-		return false;
+		return !could_bound;
 	}
 
 	static boolean nine(InputVariables globals, Parameters params) {
