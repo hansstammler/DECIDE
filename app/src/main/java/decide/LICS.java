@@ -118,9 +118,39 @@ public class LICS {
 	static boolean nine(InputVariables globals, Parameters params) {
 		return false;
 	}
+	/**
+	 * Returns true if there exists at least one set of three data points separated by exactly E PTS and F PTS con-
+secutive intervening points, respectively, that are the vertices of a triangle with area greater
+than AREA1.
+	 * 
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 
 	static boolean ten(InputVariables globals, Parameters params) {
-		return false;
+		if (globals.NUMPOINTS < 5) {
+			return false;
+		}
+		boolean got_area = false;
+		for (int i = 0; i + params.E_PTS + params.F_PTS + 2 < globals.NUMPOINTS && !got_area; i++) {
+			Point a = globals.POINTS[i];
+			Point b = globals.POINTS[i + params.E_PTS + 1];
+			Point c = globals.POINTS[i + params.E_PTS + params.F_PTS+ 2];
+
+			double ab = a.distance(b);
+			double bc = b.distance(c);
+			double ca = c.distance(a);
+
+			double s = (ab + bc + ca) / 2;
+
+			// Herons formula
+			double area = Math.sqrt(s * (s - ab) * (s - bc) * (s - ca));
+
+			got_area |= area >= params.AREA1;
+		}
+
+		return got_area;
 	}
 
 	/**
