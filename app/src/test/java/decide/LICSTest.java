@@ -45,6 +45,34 @@ public class LICSTest {
     }
 
     @Test
+    @DisplayName("LIC 6 should return correct boolean")
+    void LIC6IsCorrect(){
+        Point[] points1 = {new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0)};
+        params.N_PTS = 3;
+        params.DIST = 1.5;
+        globals.POINTS = points1;
+        assertFalse(LICS.six(globals, params), "LIC6 did not output false when it should");
+
+        Point[] points2 = {new Point(1, 1), new Point(2, 2), new Point(3, 20), new Point(4, 4), new Point(5, 5)};
+        params.N_PTS = 3;
+        params.DIST = 5;
+        globals.POINTS = points2;
+        assertTrue(LICS.six(globals, params), "LIC6 did not output true when it should");
+
+        Point[] points3 = {new Point(4, 4), new Point(2, 3), new Point(4, 4), new Point(4, 5), new Point(5, 6)};
+        params.N_PTS = 3;
+        params.DIST = 1.5;
+        globals.POINTS = points3;
+        assertTrue(LICS.six(globals, params), "LIC6 did not output true when it should");
+
+        Point[] points4 = {new Point(4, 4), new Point(2, 3), new Point(4, 4), new Point(4, 5), new Point(5, 6)};
+        params.N_PTS = 3;
+        params.DIST = 10;
+        globals.POINTS = points4;
+        assertFalse(LICS.six(globals, params), "LIC6 did not output false when it should");
+    }
+
+    @Test
     @DisplayName("LIC 11 should return correct boolean")
     void LIC11IsCorrect(){
         globals.NUMPOINTS = 5;

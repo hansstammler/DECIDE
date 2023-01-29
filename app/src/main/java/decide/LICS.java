@@ -53,8 +53,40 @@ public class LICS {
 	}
 
 	static boolean six(InputVariables globals, Parameters params) {
+		int N_PTS = params.N_PTS;
+		double DIST = params.DIST;
+
+		if(N_PTS < 3) {
+			return false;
+		}
+
+		for(int i = 0; i <= globals.POINTS.length - N_PTS; i++){
+			Point firstPoint = globals.POINTS[i];
+			Point lastPoint = globals.POINTS[i + N_PTS - 1];
+            
+			if (firstPoint.x == lastPoint.x && firstPoint.y == lastPoint.y) {
+				for (int j = i + 1; j < i + N_PTS - 1; j++) {
+					Point currPoint = globals.POINTS[j];
+					double distance =  Math.sqrt(Math.pow(firstPoint.x - currPoint.x, 2) + Math.pow(firstPoint.y - currPoint.y, 2));
+					if (distance > DIST) {
+						return true;
+					}
+				}
+			} else {
+				for (int j = i + 1; j < i + N_PTS - 1; j++) {
+					Point currPoint = globals.POINTS[j];
+					double numerator = Math.abs((lastPoint.y - firstPoint.y) * currPoint.x - (lastPoint.x - firstPoint.x) * currPoint.y + lastPoint.x * firstPoint.y - lastPoint.y * firstPoint.x);
+    				double denominator = Math.sqrt(Math.pow(lastPoint.y - firstPoint.y, 2) + Math.pow(lastPoint.x - firstPoint.x, 2));
+					double distance = numerator / denominator;
+					if (distance > DIST) {
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
+
 
 	static boolean seven(InputVariables globals, Parameters params) {
 		return false;
