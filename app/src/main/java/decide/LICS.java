@@ -43,19 +43,15 @@ public class LICS {
 	 * @return true or false
 	 */
 	static boolean two(InputVariables globals, Parameters params) {
-		for(int i = 0; i < globals.POINTS.length - 2; i++) {
-			double vertex[] = {globals.POINTS[i+1].x, globals.POINTS[i+1].y};
+		for(int i = 0; i < globals.NUMPOINTS - 2; i++) {
+			double vertex[] = {globals.POINTS[i + 1].x, globals.POINTS[i + 1].y};
 			double u[] = {globals.POINTS[i].x - vertex[0], globals.POINTS[i].y - vertex[1]};
-			double v[] = {globals.POINTS[i+2].x - vertex[0], globals.POINTS[i+2].y - vertex[1]};
+			double v[] = {globals.POINTS[i + 2].x - vertex[0], globals.POINTS[i + 2].y - vertex[1]};
 
 			double angle = getAngle(u, v, vertex);
-			if(angle == -1) {
-				return false;
-			}
-			if(angle < params.PI - params.EPSILON 
-				|| angle > params.PI + params.EPSILON) {
-				return true;
-			}				
+
+			if(angle == -1) return false;  // If undefined angle, LIC is not satisfied
+			if(angle < params.PI - params.EPSILON || angle > params.PI + params.EPSILON) return true;
 		}
 		return false;
 	}
@@ -115,7 +111,32 @@ public class LICS {
 		return !could_bound;
 	}
 
+	/**
+	 * Returns true if there exists a set of three points separated by exactly 
+	 * C_PTS and D_PTS consecutive intervening points, respectively,
+	 * in array POINTS in globals which form an angle 
+	 * (with second point as vertex) such that 
+	 * angle < (PI - EPISILON) or angle > (PI + EPSILON).
+	 * If not met, or any point coincides with the vertex, or NUMPOINTS < 5, 
+	 * false is returned.
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean nine(InputVariables globals, Parameters params) {
+		if(globals.NUMPOINTS < 5) return false;
+
+		for(int i = 0; i < globals.NUMPOINTS - params.C_PTS - params.D_PTS - 2; i++) {
+			double vertex[] = {globals.POINTS[i + params.C_PTS + 1].x, globals.POINTS[i + params.C_PTS + 1].y};
+			double u[] = {globals.POINTS[i].x - vertex[0], globals.POINTS[i].y - vertex[1]};
+			double v[] = {globals.POINTS[i + params.C_PTS + params.D_PTS + 2].x - vertex[0], 
+							globals.POINTS[i + params.C_PTS + params.D_PTS + 2].y - vertex[1]};
+
+			double angle = getAngle(u, v, vertex);
+
+			if(angle == -1) return false;  // If undefined angle, LIC is not satisfied
+			if(angle < params.PI - params.EPSILON || angle > params.PI + params.EPSILON) return true;			
+		}
 		return false;
 	}
 	/**

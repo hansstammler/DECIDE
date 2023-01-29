@@ -71,6 +71,32 @@ public class LICSTest {
         globals.NUMPOINTS = points2.length;
         assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
     }
+
+    @Test
+    @DisplayName("LIC 9 should return correct boolean")
+    void LIC9IsCorrect() {
+        params.EPSILON = params.PI/2;
+        params.C_PTS = 1;
+        params.D_PTS = 1;
+
+        globals.NUMPOINTS = 1;
+        globals.POINTS = new Point[] {new Point(0, 0)};
+        assertFalse(LICS.two(globals, params), "LIC9 did not output false when NUMPOINTS < 5.");
+
+        globals.NUMPOINTS = 5;
+        globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0), 
+                                        new Point(0, 0)};
+        assertFalse(LICS.two(globals, params), "LIC9 did not output false when a point coincides with the vertex.");
+
+        globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0), 
+                                        new Point(0, 1)};
+        assertFalse(LICS.two(globals, params), "LIC9 did not output false when angle >= PI - EPSILON.");
+
+        globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0), 
+                                        new Point(1, 1)};
+        assertTrue(LICS.two(globals, params), "LIC9 did not output true when angle < PI - EPSILON.");
+    }
+
     @Test
     @DisplayName("LIC 10 should return the correct boolean")
     void LIC10IsCorrect() {
