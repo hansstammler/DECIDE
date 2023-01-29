@@ -9,7 +9,31 @@ public class LICS {
 		return false;
 	}
 
+	/**
+	 * Returns true if there exists a set of three consecutive points 
+	 * in array POINTS in globals which form an angle 
+	 * (with second point as vertex) such that 
+	 * angle < (PI - EPISILON) or angle > (PI + EPSILON).
+	 * If not met, or any point coincides with the vertex, false is returned.
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean two(InputVariables globals, Parameters params) {
+		for(int i = 0; i < globals.POINTS.length - 2; i++) {
+			double vertex[] = {globals.POINTS[i+1].x, globals.POINTS[i+1].y};
+			double u[] = {globals.POINTS[i].x - vertex[0], globals.POINTS[i].y - vertex[1]};
+			double v[] = {globals.POINTS[i+2].x - vertex[0], globals.POINTS[i+2].y - vertex[1]};
+
+			double angle = getAngle(u, v, vertex);
+			if(angle == -1) {
+				return false;
+			}
+			if(angle < params.PI - params.EPSILON 
+				|| angle > params.PI + params.EPSILON) {
+				return true;
+			}				
+		}
 		return false;
 	}
 
@@ -143,4 +167,23 @@ public class LICS {
 		return false;
 	}
 
+	/**
+	 * Helper method that returns angle between u and v, or -1 if u or v coincides with the vertex.
+	 * @param vertex 2D vector (double[])
+	 * @param u 2D vector (double[])
+	 * @param v 2D vector (double[])
+	 * @return angle or -1
+	 */
+	static double getAngle(double[] u, double[] v, double[] vertex) {
+		// Check if any of u and v coincide with the vertex
+		if((u[0] == vertex[0] && u[1] == vertex[1]) 
+			|| (v[0] == vertex[0] && v[1] == vertex[1])) {
+			return -1;
+		}
+		// Otherwise, calculate angle
+		double num = u[0]*v[0] + u[1]*v[1];
+		double den = Math.sqrt(Math.pow(u[0], 2) + Math.pow(u[1], 2)) 
+					* Math.sqrt(Math.pow(v[0], 2) + Math.pow(v[1], 2));
+		return Math.acos(num/den);
+	}
 }
