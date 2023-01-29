@@ -119,6 +119,7 @@ public class LICSTest {
         Point[] points = {new Point(1, 1), new Point(2, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0)};
         globals.POINTS = points;
         assertFalse(LICS.thirteen(globals, params), "LIC13 did not output false when it should");
+        params.RADIUS1 = 1;
         params.RADIUS2 = 100000;
         assertTrue(LICS.thirteen(globals, params), "LIC13 did not output true when it should");
     }

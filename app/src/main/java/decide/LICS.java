@@ -122,7 +122,6 @@ public class LICS {
 		if(globals.NUMPOINTS < 5 || params.RADIUS2 <= 0) return false;
 		boolean cond1 = false, cond2 = false;
 		double a, b, c, s, area, radius;
-		double s1, s2, s3;
 		Point p1, p2, p3;
 		for(int i = 0; i < globals.POINTS.length - 2 - params.A_PTS - params.B_PTS; i++){
 			p1 = globals.POINTS[i];
@@ -136,26 +135,21 @@ public class LICS {
 			s = (a + b + c) / 2;
 			area = Math.sqrt(s * (s - a)*(s - b)*(s - c));
 			radius = (a * b * c) / (4 * area);
-
-			if (a > b && a > c){
-				s1 = a;
-				s2 = b;
-				s3 = c;
+			//make a the longest side
+			if (c > b){
+				double temp = c;
+				c = b;
+				b = temp;
 			}
-			else if (b > a && b > c){
-				s1 = b;
-				s2 = a;
-				s3 = c;
-			}
-			else {
-				s1 = c;
-				s2 = b;
-				s3 = c;
+			if (b > a){
+				double temp = b;
+				b = a;
+				a = temp;
 			}
 			//if the triangle is obtuse circle center is middle of longest side and thus radius is half of longest side.
-			if(Math.pow(s2, 2) + Math.pow(s3, 2) < Math.pow(s1, b)) radius = s1/2;	
+			if(Math.pow(b, 2) + Math.pow(c, 2) < Math.pow(a, 2)) radius = a/2;	
 
-			if(radius <= params.RADIUS1) cond1 = true;
+			if(radius > params.RADIUS1) cond1 = true;
 			if(radius <= params.RADIUS2) cond2 = true;
 
 			if (cond1 && cond2) return true;
