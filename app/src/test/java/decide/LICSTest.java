@@ -49,21 +49,20 @@ public class LICSTest {
         globals.POINTS = points2;
         assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
     }
-    //TODO
     @Test
     @DisplayName("LIC 10 shoudl return the correct boolean")
     void LIC10IsCorrect() {
+        params.AREA1 = 0.5;
+        params.E_PTS = 1;
+        params.F_PTS = 1;
+        
         Point[] points = {new Point(0., 0.), new Point(0., 0.)};
         globals.POINTS = points;
         assertFalse(LICS.one(globals, params), "LIC1 did not output false when it should");
 
-        params.LENGTH1 = 1.;
-        Point[] points2 = {new Point(1, 0), new Point(2.5, 0), new Point(3, 0)};
+        Point[] points2 = {new Point(0, 0), new Point(0, 0), new Point(1, 0), new Point(1.5, 2), new Point(3, 0)};
         globals.POINTS = points2;
         assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
-        
-        globals.POINTS = new Point[]{new Point(0., 0.)};
-        assertFalse(LICS.one(globals, params));
     }
     @Test
     @DisplayName("LIC 5 should return correct boolean")
