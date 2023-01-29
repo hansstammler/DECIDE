@@ -52,6 +52,17 @@ public class LICS {
 		return false;
 	}
 
+	/**
+	 * There exists at least one set of N PTS consecutive data points such that at least one of the
+	 * points lies a distance greater than DIST from the line joining the first and last of these N PTS
+	 * points. If the first and last points of these N PTS are identical, then the calculated distance
+	 * to compare with DIST will be the distance from the coincident point to all other points of
+	 * the N PTS consecutive points. The condition is not met when NUMPOINTS < 3.
+	 * 
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean six(InputVariables globals, Parameters params) {
 		int N_PTS = params.N_PTS;
 		double DIST = params.DIST;
@@ -87,8 +98,32 @@ public class LICS {
 		return false;
 	}
 
-
+	/**
+	 * There exists at least one set of two data points separated by exactly K PTS consecutive in-
+ 	 * tervening points that are a distance greater than the length, LENGTH1, apart. The condition
+	 * is not met when NUMPOINTS < 3.
+	 * 
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean seven(InputVariables globals, Parameters params) {
+		int K_PTS = params.K_PTS;
+		double LENGTH1 = params.LENGTH1;
+
+		if (globals.POINTS.length < 3) {
+			return false;
+		}
+
+		for (int i = 0; i < globals.POINTS.length - K_PTS - 1; i++) {
+			Point firstPoint = globals.POINTS[i];
+			Point secondPoint = globals.POINTS[i + K_PTS + 1];
+
+			double distance = Math.sqrt(Math.pow(secondPoint.x - firstPoint.x, 2) + Math.pow(secondPoint.y - firstPoint.y, 2));
+			if (distance > LENGTH1) {
+				return true;
+			}
+		}
 		return false;
 	}
 
