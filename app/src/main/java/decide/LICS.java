@@ -1,7 +1,21 @@
 package decide;
 
 public class LICS {
+
+	/**
+	 * Returns true if there exists at least one set of two consecutive data points that are a distance greater than
+	 * the length, LENGTH1, apart.
+	 * Returns false otherwise.
+	 * 
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean zero(InputVariables globals, Parameters params) {
+		for(int i = 0; i < globals.POINTS.length - 1; i++){
+			if(Math.sqrt(Math.pow(globals.POINTS[i+1].x - globals.POINTS[i].x, 2) + Math.pow(globals.POINTS[i+1].y - globals.POINTS[i].x, 2)) > params.LENGTH1)
+				return true;
+		}
 		return false;
 	}
 

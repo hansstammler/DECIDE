@@ -17,6 +17,20 @@ public class LICSTest {
         globals = new InputVariables();
         params = new Parameters();
     }
+
+    @Test
+    @DisplayName("LIC 0 should return correct boolean")
+    void LIC0IsCorrect(){
+        params.LENGTH1 = 2;
+
+        Point[] points = {new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(4, 4), new Point(5, 5)};
+        globals.POINTS = points;
+        assertFalse(LICS.zero(globals, params), "LIC 0 did not output false when it should");
+
+        Point[] points2 = {new Point(1, 1), new Point(2, 2), new Point(3, 7)};
+        globals.POINTS = points2;
+        assertTrue(LICS.zero(globals, params), "LIC 0 did not output true when it should");
+    }
     
     @Test
     @DisplayName("LIC 5 should return correct boolean")
