@@ -19,6 +19,53 @@ public class LICSTest {
     }
     
     @Test
+    @DisplayName("LIC 1 shoudl return the correct boolean")
+    void LIC1IsCorrect() {
+        Point[] points = {new Point(0., 0.), new Point(0., 0.)};
+        globals.POINTS = points;
+        assertFalse(LICS.one(globals, params), "LIC1 did not output false when it should");
+
+        params.LENGTH1 = 1.;
+        Point[] points2 = {new Point(1, 0), new Point(2.5, 0), new Point(3, 0)};
+        globals.POINTS = points2;
+        assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
+        
+        globals.POINTS = new Point[]{new Point(0., 0.)};
+        assertFalse(LICS.one(globals, params));
+    }
+    @Test
+    @DisplayName("LIC 8 shoudl return the correct boolean")
+    void LIC8IsCorrect() {
+        params.RADIUS1 = 10;
+        params.A_PTS = 1;
+        params.B_PTS = 1;
+        
+        Point[] points = {new Point(0., 0.), new Point(1., 0.)};
+        globals.POINTS = points;
+        assertFalse(LICS.five(globals, params), "LIC1 did not output false when it should");
+
+
+        Point[] points2 = {new Point(1, 0), new Point(2.5, 0), new Point(3, 0), new Point(3, 0, new Point(3, 0))};
+        globals.POINTS = points2;
+        assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
+    }
+    //TODO
+    @Test
+    @DisplayName("LIC 10 shoudl return the correct boolean")
+    void LIC10IsCorrect() {
+        Point[] points = {new Point(0., 0.), new Point(0., 0.)};
+        globals.POINTS = points;
+        assertFalse(LICS.one(globals, params), "LIC1 did not output false when it should");
+
+        params.LENGTH1 = 1.;
+        Point[] points2 = {new Point(1, 0), new Point(2.5, 0), new Point(3, 0)};
+        globals.POINTS = points2;
+        assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
+        
+        globals.POINTS = new Point[]{new Point(0., 0.)};
+        assertFalse(LICS.one(globals, params));
+    }
+    @Test
     @DisplayName("LIC 5 should return correct boolean")
     void LIC5IsCorrect(){
         Point[] points = {new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0)};
