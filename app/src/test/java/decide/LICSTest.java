@@ -33,6 +33,22 @@ public class LICSTest {
         globals.POINTS = new Point[]{new Point(0., 0.)};
         assertFalse(LICS.one(globals, params));
     }
+
+    @Test
+    @DisplayName("LIC 2 should return correct boolean")
+    void LIC2IsCorrect() {
+        params.EPSILON = params.PI/2;
+
+        globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0), new Point(0, 0)};
+        assertFalse(LICS.two(globals, params), "LIC2 did not output false when a point coincides with the vertex.");
+
+        globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0), new Point(0, 1)};
+        assertFalse(LICS.two(globals, params), "LIC2 did not output false when angle >= PI - EPSILON.");
+
+        globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0), new Point(1, 1)};
+        assertTrue(LICS.two(globals, params), "LIC2 did not output true when angle < PI - EPSILON.");
+    }
+    
     @Test
     @DisplayName("LIC 8 shoudl return the correct boolean")
     void LIC8IsCorrect() {

@@ -19,4 +19,5 @@ public class Parameters{
     double LENGTH2;
     double RADIUS2;
     double AREA2;
+    final double PI = 3.1415926535;
 }
