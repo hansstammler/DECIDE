@@ -1,12 +1,35 @@
 package decide;
 
+import java.util.ArrayList;
+
 public class LICS {
 	static boolean zero(InputVariables globals, Parameters params) {
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @param globals Instance of InputVariables, gives the state to evaluate
+	 * @param params Instance of parameters
+	 * @return truth value of launch condition 1
+	 */
 
 	static boolean one(InputVariables globals, Parameters params) {
-		return false;
+		if (globals.NUMPOINTS < 3) {
+			return false;
+		}
+		boolean could_bound = true;
+		for (int i = 0; i + 2 < globals.NUMPOINTS && could_bound; i+= 3) {
+			ArrayList<Point> points = new ArrayList<Point>();
+			for (int j = 0; j < 3; j++) {
+				points.add(globals.POINTS[i+j]);
+			}
+			/* This function uses an implementation for the bounding circle problem because that is nontrivial. */
+			Circle cir = SmallestEnclosingCircle.makeCircle(points);
+			could_bound &= cir.r <= params.RADIUS1;
+		}
+
+		return !could_bound;
 	}
 
 	/**
@@ -71,7 +94,25 @@ public class LICS {
 	}
 
 	static boolean eight(InputVariables globals, Parameters params) {
-		return false;
+		if (globals.NUMPOINTS < 5) {
+			return false;
+		}
+		boolean could_bound = true;
+		for (int i = 0; i + params.A_PTS + params.B_PTS + 1 < globals.POINTS.length; i++){
+			Point a = globals.POINTS[i];
+			Point b = globals.POINTS[i+params.A_PTS + 1];
+			Point c = globals.POINTS[i+params.A_PTS+params.B_PTS + 2];
+			
+			ArrayList<Point> points = new ArrayList<Point>();
+			points.add(a);
+			points.add(b);
+			points.add(c);
+			/* This function uses an implementation for the bounding circle problem because that is nontrivial. */
+			Circle cir = SmallestEnclosingCircle.makeCircle(points);
+			could_bound &= cir.r <= params.RADIUS1;
+		}
+		
+		return !could_bound;
 	}
 
 	static boolean nine(InputVariables globals, Parameters params) {
