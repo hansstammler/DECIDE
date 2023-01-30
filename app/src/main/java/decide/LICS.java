@@ -60,7 +60,53 @@ public class LICS {
 		return false;
 	}
 
+	/**
+	 * There exists at least one set of Q PTS consecutive data points that lie in more than QUADS
+	 * quadrants. Where there is ambiguity as to which quadrant contains a given point, priority
+	 * of decision will be by quadrant number, i.e., I, II, III, IV. For example, the data point (0,0)
+	 * is in quadrant I, the point (-l,0) is in quadrant II, the point (0,-l) is in quadrant III, the point
+	 * (0,1) is in quadrant I and the point (1,0) is in quadrant I.
+	 * 
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean four(InputVariables globals, Parameters params) {
+		boolean[] inQuadrant = new boolean[5];
+		int numberOfQuadrants = 0;
+		for (int j = 0; j < globals.POINTS.length - (params.Q_PTS - 1); j++) {
+			for (int i = 0; i < params.Q_PTS; i++) {
+				if (globals.POINTS[i].x >= 0) {
+					if (globals.POINTS[i].y >= 0) {
+						inQuadrant[1] = true;
+					} else {
+						if (globals.POINTS[i].x == 0) {
+							inQuadrant[3] = true;
+						} else {
+							inQuadrant[4] = true;
+						}
+					}
+				} else {
+					if (globals.POINTS[i].y >= 0) {
+						inQuadrant[2] = true;
+					} else {
+						inQuadrant[3] = true;
+					}
+				}
+			}
+			numberOfQuadrants = 0;
+			for (int i = 1; i <= 4; i++) {
+				if (inQuadrant[i]) {
+					numberOfQuadrants++;
+				}
+			}
+			if (numberOfQuadrants > params.QUADS) {
+				return true;
+			}
+			for (int i = 1; i <= 4; i++) {
+				inQuadrant[i] = false;
+			}
+		}
 		return false;
 	}
 

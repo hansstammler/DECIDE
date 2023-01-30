@@ -39,6 +39,24 @@ public class LICSTest {
     }
 
     @Test
+    void LIC4IsTrueWhenQ_PTSPointsLieInMoreThanQUADSQuadrants() {
+        params.Q_PTS = 2;
+        params.QUADS = 1;
+        Point[] points = {new Point(1, 1), new Point(-1, 2), new Point(0.5, 0.5)};
+        globals.POINTS = points;
+        assertTrue(LICS.four(globals, params), "LIC4 should output true when Q_PTS consecutive data points lie in more than QUADS quadrants");
+    }
+
+    @Test
+    void LIC4IsFalseWhenQ_PTSPointsLieInLessThanQUADSQuadrants() {
+        params.Q_PTS = 2;
+        params.QUADS = 2;
+        Point[] points = {new Point(1, 1), new Point(1, 2), new Point(0.5, 0.5)};
+        globals.POINTS = points;
+        assertFalse(LICS.four(globals, params), "LIC4 should output false when Q_PTS consecutive data points lie in less than QUADS quadrants");
+    }
+
+    @Test
     @DisplayName("LIC 2 should return correct boolean")
     void LIC2IsCorrect() {
         params.EPSILON = params.PI/2;
