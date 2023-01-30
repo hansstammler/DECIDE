@@ -57,6 +57,12 @@ public class LICS {
 	}
 
 	static boolean three(InputVariables globals, Parameters params) {
+		for (int i = 0; i < globals.POINTS.length - 1; i++) {     // Why -1?
+			Point a = globals.POINTS[i];
+			Point b = globals.POINTS[i + 1];
+			Point c = globals.POINTS[i + 2];
+			double area = (a.x*(b.y - c.y) + b.x*(c.y - a.y) + c.x(a.y - b.y))/2;
+		}
 		return false;
 	}
 
