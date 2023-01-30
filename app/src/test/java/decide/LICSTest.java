@@ -62,11 +62,11 @@ public class LICSTest {
     }
 
     @Test
-    void LIC3IsTrueWhenAreaIsEqualToAREA1() {
+    void LIC3IsFalseWhenAreaIsEqualToAREA1() {
         Point[] points = {new Point(0, 0), new Point(2, 0), new Point(0, 2)};
         globals.POINTS = points;
         params.AREA1 = 2;
-        assertTrue(LICS.three(globals, params), "LIC3 should output true when area is equal to AREA1");
+        assertFalse(LICS.three(globals, params), "LIC3 should output false when area is equal to AREA1");
     }
 
     @Test
