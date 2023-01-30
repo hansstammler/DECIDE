@@ -157,4 +157,15 @@ public class LICSTest {
         params.RADIUS2 = 100000;
         assertTrue(LICS.thirteen(globals, params), "LIC13 did not output true when it should");
     }
+
+    @Test
+    void LIC14IsTrueWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2() {
+        params.E_PTS = 1;
+        params.F_PTS = 1;
+        params.AREA1 = 1.5;
+        params.AREA2 = 2;
+        params.NUMPOINTS = 6;
+        Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
+        globals.POINTS = points;
+    }
 }
