@@ -200,4 +200,76 @@ public class LICSTest {
         params.RADIUS2 = 100000;
         assertTrue(LICS.thirteen(globals, params), "LIC13 did not output true when it should");
     }
+
+    @Test
+    void LIC14IsTrueWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2() {
+        params.E_PTS = 1;
+        params.F_PTS = 1;
+        params.AREA1 = 1.5;
+        params.AREA2 = 2;
+        globals.NUMPOINTS = 6;
+        Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
+        globals.POINTS = points;
+        assertTrue(LICS.fourteen(globals, params), "LIC14 should output true when one set of three data points, separated by exactly E PTS and F PTS consecutive intervening points form a triangle > AREA1 and another triangle < AREA2");
+    }
+
+    @Test
+    void LIC14IsTrueWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2Simple() {
+        params.E_PTS = 1;
+        params.F_PTS = 1;
+        params.AREA1 = 1;
+        params.AREA2 = 3;
+        globals.NUMPOINTS = 6;
+        Point[] points = {new Point(0, 0), new Point(0, 0), new Point(2, 0), new Point(0, 0), new Point(0, 2)};
+        globals.POINTS = points;
+        assertTrue(LICS.fourteen(globals, params), "LIC14 should output true when one set of three data points, separated by exactly E PTS and F PTS consecutive intervening points form a triangle > AREA1 and another triangle < AREA2");
+    }
+
+    @Test
+    void LIC14IsFalseWhenAreaOneIsLesserThanAREA1AndAreaTwoLesserThanAREA2() {
+        params.E_PTS = 1;
+        params.F_PTS = 1;
+        params.AREA1 = 3;
+        params.AREA2 = 2;
+        globals.NUMPOINTS = 6;
+        Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
+        globals.POINTS = points;
+        assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 fails and 2 holds");
+    }
+
+    @Test
+    void LIC14IsFalseWhenAreaOneIsGreaterThanAREA1AndAreaTwoGreaterThanAREA2() {
+        params.E_PTS = 1;
+        params.F_PTS = 1;
+        params.AREA1 = 1.5;
+        params.AREA2 = 0.1;
+        globals.NUMPOINTS = 6;
+        Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
+        globals.POINTS = points;
+        assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 holds and 2 fails");
+    }
+
+    @Test
+    void LIC14IsFalseWhenAreaOneIsLesserThanAREA1AndAreaTwoGreaterThanAREA2() {
+        params.E_PTS = 1;
+        params.F_PTS = 1;
+        params.AREA1 = 3;
+        params.AREA2 = 0.1;
+        globals.NUMPOINTS = 6;
+        Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
+        globals.POINTS = points;
+        assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 fails and 2 fails");
+    }
+
+    @Test
+    void LIC14IsFalseWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2ButNUMPOINTSLessThan5() {
+        params.E_PTS = 1;
+        params.F_PTS = 1;
+        params.AREA1 = 1.5;
+        params.AREA2 = 2;
+        globals.NUMPOINTS = 4;
+        Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
+        globals.POINTS = points;
+        assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 hold and 2 holds but NUMPOINTS < 5");
+    }
 }
