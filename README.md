@@ -39,5 +39,6 @@ Oscar Olsson:
 - temp
 
 Simon Marco Grunwald:
-- temp
-- temp
+- LIC1, LIC8, LIC13
+- Implementation of PUM
+- Github Troubleshooting
