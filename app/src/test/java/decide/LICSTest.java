@@ -57,21 +57,21 @@ public class LICSTest {
     void LIC3IsTrueWhenAreaIsGreaterThanAREA1() {
         Point[] points = {new Point(1, 0), new Point(1, 5), new Point(2, 0), new Point(4, 0), new Point(5, 0)};
         params.AREA1 = 2;
-        assertTrue(LICS.three(globals, params), "LIC3 outputs true when area is greater than AREA1");
+        assertTrue(LICS.three(globals, params), "LIC3 should output true when area is greater than AREA1");
     }
 
     @Test
     void LIC3IsTrueWhenAreaIsEqualToAREA1() {
         Point[] points = {new Point(0, 0), new Point(0, 4), new Point(1, 0)};
         params.AREA1 = 2;
-        assertTrue(LICS.three(globals, params), "LIC3 did not output true when it should");
+        assertTrue(LICS.three(globals, params), "LIC3 should output true when area is equal to AREA1");
     }
 
     @Test
     void LIC3IsFalseWhenAreaIsLesserThanAREA1() {
         Point[] points = {new Point(1, 0), new Point(1, 5), new Point(2, 0), new Point(4, 0), new Point(5, 0)};
         params.AREA1 = 10;
-        assertFalse(LICS.three(globals, params), "LIC3 did not output false when it should");
+        assertFalse(LICS.three(globals, params), "LIC3 should output false when area is lesser than AREA1");
     }
 
     
