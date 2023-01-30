@@ -7,6 +7,7 @@ public class LICS {
 	/**
 	 * Returns true if there exists at least one set of two consecutive data points that are a distance greater than
 	 * the length, LENGTH1, apart.
+	 * (0 ≤ LENGTH1)
 	 * Returns false otherwise.
 	 * 
 	 * @param globals Instance of InputVariables
@@ -14,6 +15,7 @@ public class LICS {
 	 * @return true or false
 	 */
 	static boolean zero(InputVariables globals, Parameters params) {
+		if(0 > params.LENGTH1) return false;
 		for(int i = 0; i < globals.POINTS.length - 1; i++){
 			if(Math.sqrt(Math.pow(globals.POINTS[i+1].x - globals.POINTS[i].x, 2) + Math.pow(globals.POINTS[i+1].y - globals.POINTS[i].x, 2)) > params.LENGTH1)
 				return true;
@@ -167,6 +169,7 @@ public class LICS {
 	 * points. If the first and last points of these N PTS are identical, then the calculated distance
 	 * to compare with DIST will be the distance from the coincident point to all other points of
 	 * the N PTS consecutive points. The condition is not met when NUMPOINTS < 3.
+	 * (3 ≤ N PTS ≤ NUMPOINTS), (0 ≤ DIST)
 	 * 
 	 * @param globals Instance of InputVariables
 	 * @param params Instance of Parameters
@@ -176,7 +179,7 @@ public class LICS {
 		int N_PTS = params.N_PTS;
 		double DIST = params.DIST;
 
-		if(N_PTS < 3) {
+		if(globals.NUMPOINTS < 3 || N_PTS < 3 || N_PTS > globals.NUMPOINTS || DIST < 0) {
 			return false;
 		}
 
@@ -211,6 +214,7 @@ public class LICS {
 	 * There exists at least one set of two data points separated by exactly K PTS consecutive in-
  	 * tervening points that are a distance greater than the length, LENGTH1, apart. The condition
 	 * is not met when NUMPOINTS < 3.
+	 * 1 ≤ K PTS ≤ (NUMPOINTS − 2)
 	 * 
 	 * @param globals Instance of InputVariables
 	 * @param params Instance of Parameters
@@ -220,7 +224,7 @@ public class LICS {
 		int K_PTS = params.K_PTS;
 		double LENGTH1 = params.LENGTH1;
 
-		if (globals.POINTS.length < 3) {
+		if (globals.NUMPOINTS < 3 ||  K_PTS < 1 ||  K_PTS > globals.NUMPOINTS -2) {
 			return false;
 		}
 
