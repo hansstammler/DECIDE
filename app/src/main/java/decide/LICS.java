@@ -348,14 +348,10 @@ than AREA1.
 	 */
 	static boolean twelve(InputVariables globals, Parameters params) {
 		if(globals.NUMPOINTS < 3) return false;
-		boolean cond1 = false;
-		boolean cond2 = false;
 		double dist;
 		for(int i = 0; i < globals.NUMPOINTS - params.K_PTS - 1; i++) {
 			dist = globals.POINTS[i].distance(globals.POINTS[i + params.K_PTS + 1]);
-			if(dist > params.LENGTH1) cond1 = true;
-			if(dist < params.LENGTH2) cond2 = true;
-			if(cond1 && cond2) return true;
+			if(dist > params.LENGTH1 && dist < params.LENGTH2) return true;
 		}; 
 		return false;
 	}
