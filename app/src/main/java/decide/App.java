@@ -5,13 +5,46 @@ package decide;
 
 import com.google.common.base.Strings;
 
+import decide.LogicalConnectorMatrix.LogicalConnector;
+
 public class App {
 
-    public Parameters params;
     public InputVariables inputVariables;
     public OutputVariables outputVariables;
 
-    public void initialize(){ //Function for filling inputvariables with stuff.
+    /**
+     * Constructor for App class, initializes 
+     */
+    public App(){
+        inputVariables = new InputVariables();
+        outputVariables = new OutputVariables();
+    }
+
+    public void initialize(){ //Function for filling inputvariables with stuff. This is only temporary so we can actually run the program.
+        inputVariables = new InputVariables();
+        inputVariables.initialize();
+
+        outputVariables = new OutputVariables();
+
+        //inputVariables.LCM = new LogicalConnectorMatrix('d'); //'r' for random, 'u' for filled with notused
+        //inputVariables.LCM.print();
+        
+        //Example of how to use LCM
+        /*
+        LogicalConnector[] lc = inputVariables.LCM.getRow(0);
+        for(LogicalConnector l: lc) {
+            switch (l){
+                case NOTUSED:
+                    System.out.print("NOTUSED");
+                    break;
+                case ANDD:
+                    System.out.print("ANDD   ");
+                    break;
+                case ORR:
+                    System.out.print("ORR    ");
+                    break;
+            }
+        }*/
     }
 
     public boolean[] conditionsMetVector(){//REPLACE THIS WITH 2.1
@@ -45,7 +78,7 @@ public class App {
     public static void main(String[] args) {
 
         App app = new App();
-        app.initialize();
+        app.initialize();   //This is only temporary, ideally we should parse some input file for this.
 
         System.out.println(app.DECIDE());
     }
