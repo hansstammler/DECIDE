@@ -171,6 +171,18 @@ public class LICSTest {
     }
 
     @Test
+    void LIC14IsTrueWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2Simple() {
+        params.E_PTS = 1;
+        params.F_PTS = 1;
+        params.AREA1 = 1;
+        params.AREA2 = 3;
+        globals.NUMPOINTS = 6;
+        Point[] points = {new Point(0, 0), new Point(0, 0), new Point(2, 0), new Point(0, 0), new Point(0, 2)};
+        globals.POINTS = points;
+        assertTrue(LICS.fourteen(globals, params), "LIC14 should output true when one set of three data points, separated by exactly E PTS and F PTS consecutive intervening points form a triangle > AREA1 and another triangle < AREA2");
+    }
+
+    @Test
     void LIC14IsFalseWhenAreaOneIsLesserThanAREA1AndAreaTwoLesserThanAREA2() {
         params.E_PTS = 1;
         params.F_PTS = 1;
