@@ -250,6 +250,9 @@ than AREA1.
 	}
 
 	static boolean fourteen(InputVariables globals, Parameters params) {
+		if (globals.NUMPOINTS < 5) {
+			return false;
+		}
 		return false;
 	}
 
