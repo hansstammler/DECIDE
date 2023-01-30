@@ -56,6 +56,20 @@ public class LICS {
 		return false;
 	}
 
+	/**
+	 * Returns true if there exists at least one set of three consecutive data 
+	 * points that are the vertices of a triangle with area greater than AREA1.
+	 * 
+	 * The area is calculted with the determinant from the matrix of the three points
+	 * a, b and c:
+	 * X1 Y1 1
+	 * X2 Y2 1
+	 * X3 Y3 1
+	 * 
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean three(InputVariables globals, Parameters params) {
 		for (int i = 0; i < globals.POINTS.length - 1; i++) {     // Why -1?
 			Point a = globals.POINTS[i];
