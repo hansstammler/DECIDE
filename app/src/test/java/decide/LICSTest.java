@@ -52,6 +52,14 @@ public class LICSTest {
         globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0), new Point(1, 1)};
         assertTrue(LICS.two(globals, params), "LIC2 did not output true when angle < PI - EPSILON.");
     }
+
+    @Test
+    void LIC3IsTrueWhenAreaIsGreaterThanAREA1() {
+        Point[] points = {new Point(1, 0), new Point(1, 5), new Point(2, 0), new Point(4, 0), new Point(5, 0)};
+        params.AREA1 = 2;
+        assertTrue(LICS.three(globals, params), "LIC3 outputs true when area is greater than AREA1");
+    }
+
     
     @Test
     @DisplayName("LIC 8 shoudl return the correct boolean")
