@@ -17,6 +17,20 @@ public class LICSTest {
         globals = new InputVariables();
         params = new Parameters();
     }
+
+    @Test
+    @DisplayName("LIC 0 should return correct boolean")
+    void LIC0IsCorrect(){
+        params.LENGTH1 = 2;
+
+        Point[] points = {new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(4, 4), new Point(5, 5)};
+        globals.POINTS = points;
+        assertFalse(LICS.zero(globals, params), "LIC 0 did not output false when it should");
+
+        Point[] points2 = {new Point(1, 1), new Point(2, 2), new Point(3, 7)};
+        globals.POINTS = points2;
+        assertTrue(LICS.zero(globals, params), "LIC 0 did not output true when it should");
+    }
     
     @Test
     @DisplayName("LIC 1 shoudl return the correct boolean")
@@ -167,6 +181,50 @@ public class LICSTest {
         Point[] points2 = {new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(5, 0), new Point(4, 0)};
         globals.POINTS = points2;
         assertTrue(LICS.five(globals, params), "LIC5 did not output true when it should");
+    }
+
+    @Test
+    @DisplayName("LIC 6 should return correct boolean")
+    void LIC6IsCorrect(){
+        Point[] points1 = {new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0)};
+        params.N_PTS = 3;
+        params.DIST = 1.5;
+        globals.POINTS = points1;
+        assertFalse(LICS.six(globals, params), "LIC6 did not output false when it should");
+
+        Point[] points2 = {new Point(1, 1), new Point(2, 2), new Point(3, 20), new Point(4, 4), new Point(5, 5)};
+        params.N_PTS = 3;
+        params.DIST = 5;
+        globals.POINTS = points2;
+        assertTrue(LICS.six(globals, params), "LIC6 did not output true when it should");
+
+        Point[] points3 = {new Point(4, 4), new Point(2, 3), new Point(4, 4), new Point(4, 5), new Point(5, 6)};
+        params.N_PTS = 3;
+        params.DIST = 1.5;
+        globals.POINTS = points3;
+        assertTrue(LICS.six(globals, params), "LIC6 did not output true when it should");
+
+        Point[] points4 = {new Point(4, 4), new Point(2, 3), new Point(4, 4), new Point(4, 5), new Point(5, 6)};
+        params.N_PTS = 3;
+        params.DIST = 10;
+        globals.POINTS = points4;
+        assertFalse(LICS.six(globals, params), "LIC6 did not output false when it should");
+    }
+
+    @Test
+    @DisplayName("LIC 7 should return correct boolean")
+    void LIC7IsCorrect(){
+        Point[] points1 = {new Point(2, 3), new Point(4, 5), new Point(6, 7), new Point(8, 9), new Point(10, 11)};
+        params.N_PTS = 2;
+        params.LENGTH1 = 2.0;
+        globals.POINTS = points1;
+        assertTrue(LICS.seven(globals, params), "LIC7 did not output true when it should");
+
+        Point[] points2 = {new Point(2, 3), new Point(4, 5), new Point(6, 7), new Point(8, 9), new Point(10, 11)};
+        params.N_PTS = 4;
+        params.LENGTH1 = 4;
+        globals.POINTS = points2;
+        assertFalse(LICS.seven(globals, params), "LIC7 did not output false when it should");
     }
 
     @Test
