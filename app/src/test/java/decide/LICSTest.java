@@ -243,6 +243,34 @@ public class LICSTest {
     }
 
     @Test
+    @DisplayName("LIC 12 should return correct boolean")
+    void LIC12IsCorrect() {
+        params.K_PTS = 1;
+
+        globals.NUMPOINTS = 2;
+        globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0)};
+        assertFalse(LICS.twelve(globals, params), "LIC12 did not output false when NUMPOINTS < 3.");
+
+        globals.NUMPOINTS = 3;
+
+        params.LENGTH1 = 2;
+        params.LENGTH2 = 2;
+        globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0), new Point(0, 1)};
+        assertFalse(LICS.twelve(globals, params), "LIC12 did not output false when distance <= LENGTH1.");
+
+        params.LENGTH1 = 1;
+        params.LENGTH2 = 1;
+        globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0), new Point(0, 1)};
+        assertFalse(LICS.twelve(globals, params), "LIC12 did not output false when distance >= LENGTH2.");
+
+        params.LENGTH1 = 1;
+        params.LENGTH2 = 2;
+        globals.POINTS = new Point[] {new Point(1, 0), new Point(0, 0), new Point(0, 1)};
+        assertTrue(LICS.twelve(globals, params), 
+                    "LIC12 did not output true when distance > LENGTH1 and distance < LENGTH2.");
+    }
+
+    @Test
     @DisplayName("LIC 13 should return correct boolean")
     void LIC13IsCorrect(){
         globals.NUMPOINTS = 5;

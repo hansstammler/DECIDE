@@ -341,7 +341,27 @@ than AREA1.
 		return false;
 	}
 
+	/**
+	 * Returns true if there exists at least two points separated by K_PTS consecutive intervening points, which are:
+	 *     1. at a distance > LENGTH1 apart
+	 *     2. at a distance < LENGTH2 apart.
+	 * Both condition 1 and 2 has to be met, and the points can be the same or different points.
+	 * If NUMPOINTS < 3, we also return false.
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean twelve(InputVariables globals, Parameters params) {
+		if(globals.NUMPOINTS < 3) return false;
+		boolean cond1 = false;
+		boolean cond2 = false;
+		double dist;
+		for(int i = 0; i < globals.NUMPOINTS - params.K_PTS - 1; i++) {
+			dist = globals.POINTS[i].distance(globals.POINTS[i + params.K_PTS + 1]);
+			if(dist > params.LENGTH1) cond1 = true;
+			if(dist < params.LENGTH2) cond2 = true;
+			if(cond1 && cond2) return true;
+		}; 
 		return false;
 	}
 	
