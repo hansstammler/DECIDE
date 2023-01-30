@@ -3,12 +3,50 @@
  */
 package decide;
 
+import com.google.common.base.Strings;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+
+    public Parameters params;
+    public InputVariables inputVariables;
+    public OutputVariables outputVariables;
+
+    public void initialize(){ //Function for filling inputvariables with stuff.
+    }
+
+    public boolean[] conditionsMetVector(){//REPLACE THIS WITH 2.1
+        return new boolean[15];
+    }
+
+    public boolean[][] preliminaryUnlockingMatrix(){//REPLACE THIS WITH 2.2
+        return new boolean[15][15];
+    }
+
+    public boolean[] finalUnlockingVector(){ //REPLACE THIS WITH 2.3
+        return new boolean[15];
+    }
+
+    public String launch(){ //REPLACE THIS WITH 2.4
+        return "NO";
+    }
+
+
+
+    //Not implemented
+    public boolean DECIDE(){
+        outputVariables.CMV = conditionsMetVector();
+        outputVariables.PUM = preliminaryUnlockingMatrix();
+        outputVariables.FUV = finalUnlockingVector();
+        outputVariables.LAUNCH = launch();
+
+        return false;
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
+        App app = new App();
+        app.initialize();
+
+        System.out.println(app.DECIDE());
     }
 }
