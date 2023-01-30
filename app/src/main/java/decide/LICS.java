@@ -253,6 +253,8 @@ than AREA1.
 		if (globals.NUMPOINTS < 5) {
 			return false;
 		}
+		boolean greaterThanAREA1 = false;
+		boolean lesserThanAREA2 = false;
 
 		int end = globals.POINTS.length - (params.E_PTS + params.F_PTS) - 2;
 		for (int i = 0; i < end; i++) {
@@ -260,6 +262,15 @@ than AREA1.
 			Point b = globals.POINTS[i + params.E_PTS + 1];
 			Point c = globals.POINTS[i + params.F_PTS + 1];
 			double area = (a.x*(b.y - c.y) + b.x*(c.y - a.y) + c.x(a.y - b.y))/2;
+			if (area > params.AREA1) {
+				greaterThanAREA1 = true;
+			}
+			if (area < params.AREA2) {
+				lesserThanAREA2 = true;
+			}
+		}
+		if (greaterThanAREA1 && lesserThanAREA2) {
+			return true;
 		}
 		return false;
 	}
