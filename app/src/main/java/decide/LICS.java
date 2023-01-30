@@ -211,7 +211,7 @@ than AREA1.
 			dist = globals.POINTS[i].distance(globals.POINTS[i + params.K_PTS + 1]);
 			if(dist > params.LENGTH1) cond1 = true;
 			if(dist < params.LENGTH2) cond2 = true;
-			if(cond1 && cond2) break;
+			if(cond1 && cond2) return true;
 		}; 
 		return false;
 	}
