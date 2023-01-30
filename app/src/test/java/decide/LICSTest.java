@@ -67,6 +67,13 @@ public class LICSTest {
         assertTrue(LICS.three(globals, params), "LIC3 did not output true when it should");
     }
 
+    @Test
+    void LIC3IsFalseWhenAreaIsLesserThanAREA1() {
+        Point[] points = {new Point(1, 0), new Point(1, 5), new Point(2, 0), new Point(4, 0), new Point(5, 0)};
+        params.AREA1 = 10;
+        assertFalse(LICS.three(globals, params), "LIC3 did not output false when it should");
+    }
+
     
     @Test
     @DisplayName("LIC 8 shoudl return the correct boolean")
