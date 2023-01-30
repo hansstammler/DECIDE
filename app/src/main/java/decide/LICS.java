@@ -58,11 +58,9 @@ public class LICS {
 	 */
 	static boolean two(InputVariables globals, Parameters params) {
 		for(int i = 0; i < globals.NUMPOINTS - 2; i++) {
-			double vertex[] = {globals.POINTS[i + 1].x, globals.POINTS[i + 1].y};
-			double u[] = {globals.POINTS[i].x - vertex[0], globals.POINTS[i].y - vertex[1]};
-			double v[] = {globals.POINTS[i + 2].x - vertex[0], globals.POINTS[i + 2].y - vertex[1]};
-
-			double angle = getAngle(u, v, vertex);
+			Point vertex = globals.POINTS[i + 1];
+			Point p = globals.POINTS[i].subtract(vertex);
+			double angle = p.angle(globals.POINTS[i + 2].subtract(vertex), vertex);
 
 			if(angle == -1) return false;  // If undefined angle, LIC is not satisfied
 			if(angle < params.PI - params.EPSILON || angle > params.PI + params.EPSILON) return true;
@@ -276,12 +274,9 @@ public class LICS {
 		if(globals.NUMPOINTS < 5) return false;
 
 		for(int i = 0; i < globals.NUMPOINTS - params.C_PTS - params.D_PTS - 2; i++) {
-			double vertex[] = {globals.POINTS[i + params.C_PTS + 1].x, globals.POINTS[i + params.C_PTS + 1].y};
-			double u[] = {globals.POINTS[i].x - vertex[0], globals.POINTS[i].y - vertex[1]};
-			double v[] = {globals.POINTS[i + params.C_PTS + params.D_PTS + 2].x - vertex[0], 
-							globals.POINTS[i + params.C_PTS + params.D_PTS + 2].y - vertex[1]};
-
-			double angle = getAngle(u, v, vertex);
+			Point vertex = globals.POINTS[i + params.C_PTS + 1];
+			Point p = globals.POINTS[i].subtract(vertex);
+			double angle = p.angle(globals.POINTS[i + params.C_PTS + params.D_PTS + 2].subtract(vertex), vertex);
 
 			if(angle == -1) return false;  // If undefined angle, LIC is not satisfied
 			if(angle < params.PI - params.EPSILON || angle > params.PI + params.EPSILON) return true;			
@@ -442,25 +437,5 @@ than AREA1.
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * Helper method that returns angle between u and v, or -1 if u or v coincides with the vertex.
-	 * @param vertex 2D vector (double[])
-	 * @param u 2D vector (double[])
-	 * @param v 2D vector (double[])
-	 * @return angle or -1
-	 */
-	static double getAngle(double[] u, double[] v, double[] vertex) {
-		// Check if any of u and v coincide with the vertex
-		if((u[0] == vertex[0] && u[1] == vertex[1]) 
-			|| (v[0] == vertex[0] && v[1] == vertex[1])) {
-			return -1;
-		}
-		// Otherwise, calculate angle
-		double num = u[0]*v[0] + u[1]*v[1];
-		double den = Math.sqrt(Math.pow(u[0], 2) + Math.pow(u[1], 2)) 
-					* Math.sqrt(Math.pow(v[0], 2) + Math.pow(v[1], 2));
-		return Math.acos(num/den);
 	}
 }
