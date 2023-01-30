@@ -261,7 +261,7 @@ than AREA1.
 			Point a = globals.POINTS[i];
 			Point b = globals.POINTS[i + params.E_PTS + 1];
 			Point c = globals.POINTS[i + params.F_PTS + 1];
-			double area = (a.x*(b.y - c.y) + b.x*(c.y - a.y) + c.x(a.y - b.y))/2;
+			double area = (a.x*(b.y - c.y) + b.x*(c.y - a.y) + c.x*(a.y - b.y))/2;
 			if (area > params.AREA1) {
 				greaterThanAREA1 = true;
 			}
