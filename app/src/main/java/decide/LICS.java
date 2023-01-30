@@ -61,6 +61,26 @@ public class LICS {
 	}
 
 	static boolean four(InputVariables globals, Parameters params) {
+		boolean[] inQuadrant = new int[5];
+		for (int i = 0; i < globals.POINTS.length - (params.Q_PTS - 1); i++) {
+			if (globals.POINTS[i].x >= 0) {
+				if (globals.POINTS[i].y >= 0) {
+					inQuadrant[1] = true;
+				} else {
+					if (globals.POINTS[i].x == 0) {
+						inQuadrant[3] = true;
+					} else {
+						inQuadrant[4] = true;
+					}
+				}
+			} else {
+				if (globals.POINTS[i].y >= 0) {
+					inQuadrant[2] = true;
+				} else {
+					inQuadrant[3] = true;
+				}
+			}
+		}
 		return false;
 	}
 
