@@ -71,7 +71,7 @@ public class LICS {
 	 * @return true or false
 	 */
 	static boolean three(InputVariables globals, Parameters params) {
-		for (int i = 0; i < globals.POINTS.length - 1; i++) {     // Why -1?
+		for (int i = 0; i < globals.POINTS.length - 2; i++) {
 			Point a = globals.POINTS[i];
 			Point b = globals.POINTS[i + 1];
 			Point c = globals.POINTS[i + 2];
