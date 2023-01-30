@@ -60,6 +60,13 @@ public class LICSTest {
         assertTrue(LICS.three(globals, params), "LIC3 outputs true when area is greater than AREA1");
     }
 
+    @Test
+    void LIC3IsTrueWhenAreaIsEqualToAREA1() {
+        Point[] points = {new Point(0, 0), new Point(0, 4), new Point(1, 0)};
+        params.AREA1 = 2;
+        assertTrue(LICS.three(globals, params), "LIC3 did not output true when it should");
+    }
+
     
     @Test
     @DisplayName("LIC 8 shoudl return the correct boolean")
