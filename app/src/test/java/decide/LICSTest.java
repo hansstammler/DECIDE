@@ -205,4 +205,16 @@ public class LICSTest {
         globals.POINTS = points;
         assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 fails and 2 fails");
     }
+
+    @Test
+    void LIC14IsFalseWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2ButNUMPOINTSLessThan5() {
+        params.E_PTS = 1;
+        params.F_PTS = 1;
+        params.AREA1 = 1.5;
+        params.AREA2 = 2;
+        params.NUMPOINTS = 4;
+        Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
+        globals.POINTS = points;
+        assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 hold and 2 holds but NUMPOINTS < 5");
+    }
 }
