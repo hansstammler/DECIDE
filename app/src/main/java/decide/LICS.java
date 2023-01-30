@@ -75,10 +75,10 @@ public class LICS {
 			Point a = globals.POINTS[i];
 			Point b = globals.POINTS[i + 1];
 			Point c = globals.POINTS[i + 2];
-			double area = (a.x*(b.y - c.y) + b.x*(c.y - a.y) + c.x(a.y - b.y))/2;
+			double area = (a.x*(b.y - c.y) + b.x*(c.y - a.y) + c.x*(a.y - b.y))/2;
+			if(area >= params.AREA1)
+				return true;
 		}
-		if(area >= AREA1)
-			return true;
 		return false;
 	}
 
