@@ -176,7 +176,7 @@ public class LICSTest {
         params.F_PTS = 1;
         params.AREA1 = 3;
         params.AREA2 = 2;
-        params.NUMPOINTS = 6;
+        globals.NUMPOINTS = 6;
         Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
         globals.POINTS = points;
         assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 fails and 2 holds");
@@ -188,7 +188,7 @@ public class LICSTest {
         params.F_PTS = 1;
         params.AREA1 = 1.5;
         params.AREA2 = 0.1;
-        params.NUMPOINTS = 6;
+        globals.NUMPOINTS = 6;
         Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
         globals.POINTS = points;
         assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 holds and 2 fails");
@@ -200,7 +200,7 @@ public class LICSTest {
         params.F_PTS = 1;
         params.AREA1 = 3;
         params.AREA2 = 0.1;
-        params.NUMPOINTS = 6;
+        globals.NUMPOINTS = 6;
         Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
         globals.POINTS = points;
         assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 fails and 2 fails");
@@ -212,7 +212,7 @@ public class LICSTest {
         params.F_PTS = 1;
         params.AREA1 = 1.5;
         params.AREA2 = 2;
-        params.NUMPOINTS = 4;
+        globals.NUMPOINTS = 4;
         Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
         globals.POINTS = points;
         assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 hold and 2 holds but NUMPOINTS < 5");
