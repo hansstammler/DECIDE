@@ -61,24 +61,39 @@ public class LICS {
 	}
 
 	static boolean four(InputVariables globals, Parameters params) {
-		boolean[] inQuadrant = new int[5];
-		for (int i = 0; i < globals.POINTS.length - (params.Q_PTS - 1); i++) {
-			if (globals.POINTS[i].x >= 0) {
-				if (globals.POINTS[i].y >= 0) {
-					inQuadrant[1] = true;
-				} else {
-					if (globals.POINTS[i].x == 0) {
-						inQuadrant[3] = true;
+		boolean[] inQuadrant = new boolean[5];
+		int numberOfQuadrants = 0;
+		for (int j = 0; j < globals.POINTS.length - (params.Q_PTS - 1); j++) {
+			for (int i = 0; i < params.Q_PTS; i++) {
+				if (globals.POINTS[i].x >= 0) {
+					if (globals.POINTS[i].y >= 0) {
+						inQuadrant[1] = true;
 					} else {
-						inQuadrant[4] = true;
+						if (globals.POINTS[i].x == 0) {
+							inQuadrant[3] = true;
+						} else {
+							inQuadrant[4] = true;
+						}
+					}
+				} else {
+					if (globals.POINTS[i].y >= 0) {
+						inQuadrant[2] = true;
+					} else {
+						inQuadrant[3] = true;
 					}
 				}
-			} else {
-				if (globals.POINTS[i].y >= 0) {
-					inQuadrant[2] = true;
-				} else {
-					inQuadrant[3] = true;
+			}
+			numberOfQuadrants = 0;
+			for (int i = 1; i <= 4; i++) {
+				if (inQuadrant[i]) {
+					numberOfQuadrants++;
 				}
+			}
+			if (numberOfQuadrants > params.QUADS) {
+				return true;
+			}
+			for (int i = 1; i <= 4; i++) {
+				inQuadrant[i] = false;
 			}
 		}
 		return false;
