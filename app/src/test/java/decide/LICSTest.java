@@ -164,7 +164,7 @@ public class LICSTest {
         params.F_PTS = 1;
         params.AREA1 = 1.5;
         params.AREA2 = 2;
-        params.NUMPOINTS = 6;
+        globals.NUMPOINTS = 6;
         Point[] points = {new Point(0, 0), new Point(1, 0), new Point(2, 0), new Point(1, 1), new Point(0, 2), new Point(0, 1)};
         globals.POINTS = points;
         assertTrue(LICS.fourteen(globals, params), "LIC14 should output true when one set of three data points, separated by exactly E PTS and F PTS consecutive intervening points form a triangle > AREA1 and another triangle < AREA2");
