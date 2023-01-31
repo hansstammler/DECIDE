@@ -104,18 +104,41 @@ public class LICSTest {
 				"LIC4 should output false when Q_PTS consecutive data points lie in less than QUADS quadrants");
 	}
 
+	/**
+	 * Tests LIC 2 with invalid input. The test data contains a point (the last one) 
+	 * coinciding with the vertex (the second one), so it should return false.
+	 */
 	@Test
-	@DisplayName("LIC 2 should return correct boolean")
-	void LIC2IsCorrect() {
+	@DisplayName("Tests LIC 2 with invalid input.")
+	void LIC2InvalidTest() {
 		params.EPSILON = params.PI / 2;
 		globals.NUMPOINTS = 3;
-
 		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0), new Point(0, 0) };
 		assertFalse(LICS.two(globals, params), "LIC2 did not output false when a point coincides with the vertex.");
+	}
 
+	/**
+	 * Tests LIC 2 with negative input, i.e., when the angle between the first and third point 
+	 * (PI/2) is >= PI - EPSILON = PI/2, so it should return false.
+	 */
+	@Test
+	@DisplayName("Tests LIC 2 with negative input.")
+	void LIC2NegativeTest() {
+		params.EPSILON = params.PI / 2;
+		globals.NUMPOINTS = 3;
 		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0), new Point(0, 1) };
 		assertFalse(LICS.two(globals, params), "LIC2 did not output false when angle >= PI - EPSILON.");
+	}
 
+	/**
+	 * Tests LIC 2 with positive input, i.e., when the angle between the first and third point 
+	 * (PI/4) is < PI - EPSILON = PI/2, so it should return true.
+	 */
+	@Test
+	@DisplayName("Tests LIC 2 with positive input.")
+	void LIC2PositiveTest() {
+		params.EPSILON = params.PI / 2;
+		globals.NUMPOINTS = 3;
 		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0), new Point(1, 1) };
 		assertTrue(LICS.two(globals, params), "LIC2 did not output true when angle < PI - EPSILON.");
 	}
@@ -184,26 +207,68 @@ public class LICSTest {
 		assertFalse(LICS.five(globals, params), "LIC1 did not output false when it should");
 	}
 
+	/**
+	 * Tests LIC 9 with invalid input. The test data contains only one point (should be >= 5), 
+	 * so it should return false.
+	 */
 	@Test
-	@DisplayName("LIC 9 should return correct boolean")
-	void LIC9IsCorrect() {
+	@DisplayName("Tests LIC 9 with invalid input.")
+	void LIC9InvalidTest1() {
 		params.EPSILON = params.PI / 2;
 		params.C_PTS = 1;
 		params.D_PTS = 1;
-
 		globals.NUMPOINTS = 1;
 		globals.POINTS = new Point[] { new Point(0, 0) };
 		assertFalse(LICS.nine(globals, params), "LIC9 did not output false when NUMPOINTS < 5.");
+	}
 
+	/**
+	 * Tests LIC 9 with invalid input. The test data contains a point (the last one) 
+	 * coinciding with the vertex (the third one), so it should return false.
+	 */
+	@Test
+	@DisplayName("Tests LIC 9 with invalid input.")
+	void LIC9InvalidTest2() {
+		params.EPSILON = params.PI / 2;
+		params.C_PTS = 1;
+		params.D_PTS = 1;
 		globals.NUMPOINTS = 5;
 		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0),
 				new Point(0, 0) };
 		assertFalse(LICS.nine(globals, params), "LIC9 did not output false when a point coincides with the vertex.");
+	}
 
+	/**
+	 * Tests LIC 9 with negative input, i.e., when the angle between the first and last point 
+	 * (PI/2) is >= PI - EPSILON = PI/2, so it should return false.
+	 */
+	@Test
+	@DisplayName("Tests LIC 9 with negative input.")
+	void LIC9NegativeTest() {
+		params.EPSILON = params.PI / 2;
+		params.C_PTS = 1;
+		params.D_PTS = 1;
+		globals.NUMPOINTS = 5;
 		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0),
 				new Point(0, 1) };
 		assertFalse(LICS.nine(globals, params), "LIC9 did not output false when angle >= PI - EPSILON.");
 
+		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0),
+				new Point(1, 1) };
+		assertTrue(LICS.nine(globals, params), "LIC9 did not output true when angle < PI - EPSILON.");
+	}
+
+	/**
+	 * Tests LIC 9 with positive input, i.e., when the angle between the first and last point 
+	 * (PI/4) is < PI - EPSILON = PI/2, so it should return true.
+	 */
+	@Test
+	@DisplayName("Tests LIC 9 with positive input.")
+	void LIC9PositiveTest() {
+		params.EPSILON = params.PI / 2;
+		params.C_PTS = 1;
+		params.D_PTS = 1;
+		globals.NUMPOINTS = 5;
 		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0),
 				new Point(1, 1) };
 		assertTrue(LICS.nine(globals, params), "LIC9 did not output true when angle < PI - EPSILON.");
@@ -351,27 +416,66 @@ public class LICSTest {
 		assertTrue(LICS.eleven(globals, params), "LIC11 did not output true when it should");
 	}
 
+	/**
+	 * Tests LIC 12 with invalid input. The test data only contains two points when at least three are required, 
+	 * so it should return false.
+	 */
 	@Test
-	@DisplayName("LIC 12 should return correct boolean")
-	void LIC12IsCorrect() {
+	@DisplayName("Tests LIC 12 with invalid input.")
+	void LIC12InvalidTest() {
 		params.K_PTS = 1;
-
 		globals.NUMPOINTS = 2;
+		params.LENGTH1 = 0.5;
+		params.LENGTH2 = 2;
 		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0) };
 		assertFalse(LICS.twelve(globals, params), "LIC12 did not output false when NUMPOINTS < 3.");
+	}
 
+	/**
+	 * Tests LIC 12 with negative input, i.e., when the distance between v and u <= LENGTH1, where 
+	 * v = first point - vertex (second point)
+	 * u = last point - vertex,
+	 * so it should return false.
+	 */
+	@Test
+	@DisplayName("Tests LIC 12 with negative input.")
+	void LIC12NegativeTest1() {
+		params.K_PTS = 1;
 		globals.NUMPOINTS = 3;
-
 		params.LENGTH1 = 2;
 		params.LENGTH2 = 2;
 		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0), new Point(0, 1) };
 		assertFalse(LICS.twelve(globals, params), "LIC12 did not output false when distance <= LENGTH1.");
+	}
 
+	/**
+	 * Tests LIC 12 with negative input, i.e., when the distance between v and u >= LENGTH2, where 
+	 * v = first point - vertex (second point)
+	 * u = last point - vertex,
+	 * so it should return false.
+	 */
+	@Test
+	@DisplayName("Tests LIC 12 with negative input.")
+	void LIC12NegativeTest2() {
+		params.K_PTS = 1;
+		globals.NUMPOINTS = 3;
 		params.LENGTH1 = 1;
 		params.LENGTH2 = 1;
 		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0), new Point(0, 1) };
 		assertFalse(LICS.twelve(globals, params), "LIC12 did not output false when distance >= LENGTH2.");
+	}
 
+	/**
+	 * Tests LIC 12 with positive input, i.e., when the distance between v and u > LENGTH1 and < LENGTH2, where 
+	 * v = first point - vertex (second point)
+	 * u = last point - vertex,
+	 * so it should return true.
+	 */
+	@Test
+	@DisplayName("Tests LIC 12 with positive input.")
+	void LIC12PositiveTest() {
+		params.K_PTS = 1;
+		globals.NUMPOINTS = 3;
 		params.LENGTH1 = 1;
 		params.LENGTH2 = 2;
 		globals.POINTS = new Point[] { new Point(1, 0), new Point(0, 0), new Point(0, 1) };
