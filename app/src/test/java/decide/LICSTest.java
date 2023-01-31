@@ -177,17 +177,29 @@ public class LICSTest {
         globals.NUMPOINTS = points2.length;
         assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
     }
+    /**
+     * There are no two consecutive data points where the latter is larger than the former.
+     * @result Test will pass if LIC5 is correctly implemeted.
+     */
     @Test
-    @DisplayName("LIC 5 should return correct boolean")
-    void LIC5IsCorrect(){
+    @DisplayName("LIC 5 should return false for negative instance")
+    void LIC5IsNegative(){
         Point[] points = {new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0)};
         globals.POINTS = points;
         assertFalse(LICS.five(globals, params), "LIC5 did not output false when it should");
-
-        Point[] points2 = {new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(5, 0), new Point(4, 0)};
-        globals.POINTS = points2;
+    }
+    /**
+     * There are two consecutive data points where the latter is larger than the former.
+     * @result Test will pass if LIC5 is correctly implemeted.
+     */
+    @Test
+    @DisplayName("LIC 5 should return true for positive instance")
+    void LIC5IsPositive(){
+        Point[] points = {new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(5, 0), new Point(4, 0)};
+        globals.POINTS = points;
         assertTrue(LICS.five(globals, params), "LIC5 did not output true when it should");
     }
+
 
     @Test
     @DisplayName("LIC 6 should return correct boolean")
@@ -250,19 +262,32 @@ public class LICSTest {
         globals.NUMPOINTS = points1.length;
         assertFalse(LICS.seven(globals, params), "LIC7 did not output false when it should");    
     }
-
+    /**
+     * There are no two data points separated by G_PTS where the latter is larger than the former.
+     * @result Test will pass if LIC11 is correctly implemeted.
+     */
     @Test
-    @DisplayName("LIC 11 should return correct boolean")
-    void LIC11IsCorrect(){
+    @DisplayName("LIC 11 should return false for negative instance")
+    void LIC11IsNegative(){
         globals.NUMPOINTS = 5;
         params.G_PTS = 2;
 
         Point[] points = {new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0)};
         globals.POINTS = points;
         assertFalse(LICS.eleven(globals, params), "LIC11 did not output false when it should");
+    }
+    /**
+     * There are two data points separated by G_PTS where the latter is larger than the former.
+     * @result Test will pass if LIC5 is correctly implemeted.
+     */
+    @Test
+    @DisplayName("LIC 11 should return true for positive instance")
+    void LIC11IsPositive(){
+        globals.NUMPOINTS = 5;
+        params.G_PTS = 2;
 
-        Point[] points2 = {new Point(1, 0), new Point(6, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0)};
-        globals.POINTS = points2;
+        Point[] points = {new Point(1, 0), new Point(6, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0)};
+        globals.POINTS = points;
         assertTrue(LICS.eleven(globals, params), "LIC11 did not output true when it should");
     }
 
@@ -294,9 +319,14 @@ public class LICSTest {
                     "LIC12 did not output true when distance > LENGTH1 and distance < LENGTH2.");
     }
 
+    /**
+     * There are no three data points separated by A_PTS and B_PTS that could be contained in a circle of RADIUS2
+     * or three that cannot be contained in a circle of radius 1.
+     * @result Test will pass if LIC5 is correctly implemeted.
+     */
     @Test
-    @DisplayName("LIC 13 should return correct boolean")
-    void LIC13IsCorrect(){
+    @DisplayName("LIC 13 should return false for negative instance")
+    void LIC13IsNegative(){
         globals.NUMPOINTS = 5;
         params.A_PTS = 1;
         params.B_PTS = 1;
@@ -306,6 +336,22 @@ public class LICSTest {
         Point[] points = {new Point(1, 1), new Point(2, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0)};
         globals.POINTS = points;
         assertFalse(LICS.thirteen(globals, params), "LIC13 did not output false when it should");
+
+    }
+    /**
+     * There are three data points separated by A_PTS and B_PTS that could be contained in a circle of RADIUS2
+     * and three that cannot be contained in a circle of radius 1.
+     * @result Test will pass if LIC5 is correctly implemeted.
+     */
+    @Test
+    @DisplayName("LIC 13 should return true for positive instance")
+    void LIC13IsPositive(){
+        globals.NUMPOINTS = 5;
+        params.A_PTS = 1;
+        params.B_PTS = 1;
+
+        Point[] points = {new Point(1, 1), new Point(2, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0)};
+        globals.POINTS = points;
         params.RADIUS1 = 1;
         params.RADIUS2 = 100000;
         assertTrue(LICS.thirteen(globals, params), "LIC13 did not output true when it should");
