@@ -27,8 +27,9 @@ Hans Stammler:
 - Implementation of logical connector matrix
 
 Jesper Slagarp:
-- temp
-- temp
+- LIC0, LIC6, LIC7
+- Implementation of FUV
+- Refactoring
 
 Linnéa Gustafsson:
 - temp
