@@ -17,7 +17,7 @@ public class LICS {
 	static boolean zero(InputVariables globals, Parameters params) {
 		if(0 > params.LENGTH1) return false;
 		for(int i = 0; i < globals.POINTS.length - 1; i++){
-			if(Math.sqrt(Math.pow(globals.POINTS[i+1].x - globals.POINTS[i].x, 2) + Math.pow(globals.POINTS[i+1].y - globals.POINTS[i].x, 2)) > params.LENGTH1)
+			if(globals.POINTS[i+1].distance(globals.POINTS[i]) > params.LENGTH1)
 				return true;
 		}
 		return false;
@@ -91,7 +91,7 @@ public class LICS {
 			Point a = globals.POINTS[i];
 			Point b = globals.POINTS[i + 1];
 			Point c = globals.POINTS[i + 2];
-			double area = (a.x*(b.y - c.y) + b.x*(c.y - a.y) + c.x*(a.y - b.y))/2;
+			double area = Geometry.triangleArea(a, b, c);
 			if(area > params.AREA1)
 				return true;
 		}
@@ -192,7 +192,7 @@ public class LICS {
 			if (firstPoint.x == lastPoint.x && firstPoint.y == lastPoint.y) {
 				for (int j = i + 1; j < i + N_PTS - 1; j++) {
 					Point currPoint = globals.POINTS[j];
-					double distance =  Math.sqrt(Math.pow(firstPoint.x - currPoint.x, 2) + Math.pow(firstPoint.y - currPoint.y, 2));
+					double distance =  firstPoint.distance(currPoint);
 					if (distance > DIST) {
 						return true;
 					}
@@ -201,7 +201,7 @@ public class LICS {
 				for (int j = i + 1; j < i + N_PTS - 1; j++) {
 					Point currPoint = globals.POINTS[j];
 					double numerator = Math.abs((lastPoint.y - firstPoint.y) * currPoint.x - (lastPoint.x - firstPoint.x) * currPoint.y + lastPoint.x * firstPoint.y - lastPoint.y * firstPoint.x);
-    				double denominator = Math.sqrt(Math.pow(lastPoint.y - firstPoint.y, 2) + Math.pow(lastPoint.x - firstPoint.x, 2));
+    				double denominator = lastPoint.distance(firstPoint);
 					double distance = numerator / denominator;
 					if (distance > DIST) {
 						return true;
@@ -234,7 +234,7 @@ public class LICS {
 			Point firstPoint = globals.POINTS[i];
 			Point secondPoint = globals.POINTS[i + K_PTS + 1];
 
-			double distance = Math.sqrt(Math.pow(secondPoint.x - firstPoint.x, 2) + Math.pow(secondPoint.y - firstPoint.y, 2));
+			double distance = secondPoint.distance(firstPoint);
 			if (distance > LENGTH1) {
 				return true;
 			}
@@ -300,8 +300,8 @@ public class LICS {
 	}
 	/**
 	 * Returns true if there exists at least one set of three data points separated by exactly E PTS and F PTS con-
-secutive intervening points, respectively, that are the vertices of a triangle with area greater
-than AREA1.
+     * secutive intervening points, respectively, that are the vertices of a triangle with area greater
+     * than AREA1.
 	 * 
 	 * @param globals Instance of InputVariables
 	 * @param params Instance of Parameters
@@ -318,14 +318,7 @@ than AREA1.
 			Point b = globals.POINTS[i + params.E_PTS + 1];
 			Point c = globals.POINTS[i + params.E_PTS + params.F_PTS+ 2];
 
-			double ab = a.distance(b);
-			double bc = b.distance(c);
-			double ca = c.distance(a);
-
-			double s = (ab + bc + ca) / 2;
-
-			// Herons formula
-			double area = Math.sqrt(s * (s - ab) * (s - bc) * (s - ca));
+			double area = Geometry.triangleArea(a, b, c);
 
 			got_area |= area >= params.AREA1;
 		}
@@ -395,12 +388,11 @@ than AREA1.
 			p2 = globals.POINTS[i + 1 + params.A_PTS];
 			p3 = globals.POINTS[i + 2 + params.A_PTS + params.B_PTS];
 
-			a = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
-			b = Math.sqrt(Math.pow(p2.x - p3.x, 2) + Math.pow(p2.y - p3.y, 2));
-			c = Math.sqrt(Math.pow(p3.x - p1.x, 2) + Math.pow(p3.y - p1.y, 2));
+			a = p1.distance(p2);
+			b = p2.distance(p3);
+			c = p3.distance(p1);
 
-			s = (a + b + c) / 2;
-			area = Math.sqrt(s * (s - a)*(s - b)*(s - c));
+			area = Geometry.triangleArea(p1, p2, p3);
 			radius = (a * b * c) / (4 * area);
 			//make a the longest side
 			if (c > b){
@@ -449,7 +441,7 @@ than AREA1.
 			Point a = globals.POINTS[i];
 			Point b = globals.POINTS[i + params.E_PTS + 1];
 			Point c = globals.POINTS[i + params.E_PTS + params.F_PTS + 2];
-			double area = (a.x*(b.y - c.y) + b.x*(c.y - a.y) + c.x*(a.y - b.y))/2;
+			double area = Geometry.triangleArea(a, b, c);
 			if (area > params.AREA1) {
 				greaterThanAREA1 = true;
 			}
