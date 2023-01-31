@@ -9,11 +9,13 @@ import org.junit.jupiter.api.DisplayName;
 public class DECIDETest {
 	InputVariables globals;
 	Parameters params;
+    App app;
 
 	@BeforeEach
 	void setUp() {
 		globals = new InputVariables();
 		params = new Parameters();
+        app = new App();
 	}
 
     /**
@@ -24,26 +26,26 @@ public class DECIDETest {
 	@Test
 	@DisplayName("Tests DECIDE for positive input.")
 	void DECIDEPositiveTest1() {
-        params.LENGTH1 = 2;
-        params.RADIUS1 = 0.5;
-        params.EPSILON = params.PI/2;
-        params.AREA1 = 2;
-        params.Q_PTS = 3;
-        params.QUADS = 2;
-        params.DIST = 2;
-        params.N_PTS = 5;
-        params.K_PTS = 2;
-        params.A_PTS = 2;
-        params.B_PTS = 3;
-        params.C_PTS = 2;
-        params.D_PTS = 1;
-        params.E_PTS = 3;
-        params.F_PTS = 3;
-        params.G_PTS = 3;
-        params.LENGTH2 = 3;
-        params.RADIUS2 = 5;
-        params.AREA2 = 10;
-		globals.POINTS = new Point[] { 
+        app.params.LENGTH1 = 2;
+        app.params.RADIUS1 = 0.5;
+        app.params.EPSILON = params.PI/2;
+        app.params.AREA1 = 2;
+        app.params.Q_PTS = 3;
+        app.params.QUADS = 2;
+        app.params.DIST = 2;
+        app.params.N_PTS = 5;
+        app.params.K_PTS = 2;
+        app.params.A_PTS = 2;
+        app.params.B_PTS = 3;
+        app.params.C_PTS = 2;
+        app.params.D_PTS = 1;
+        app.params.E_PTS = 3;
+        app.params.F_PTS = 3;
+        app.params.G_PTS = 3;
+        app.params.LENGTH2 = 3;
+        app.params.RADIUS2 = 5;
+        app.params.AREA2 = 10;
+		app.inputVariables.POINTS = new Point[] { 
             new Point(0, 0), new Point(3, 0), new Point(1, 1), // 0 and 1
             new Point(2, 2), new Point(1, 1), new Point(2, 1), // 2
             new Point(0, 0), new Point(0, 4), new Point(4, 0), // 3 
@@ -55,8 +57,8 @@ public class DECIDETest {
             new Point(4, 0), new Point(0.3, 4.3), new Point(4.2, 0.12), new Point(7.6, 0), new Point(2, 0), // 11
             new Point(0.1, 0), new Point(0.3, 4.3), new Point(4.2, 0.12), new Point(2.5, 0) // 12
         };
-        globals.NUMPOINTS = 50;
-		assertTrue(App.DECIDE(globals, params), "DECIDE did not output true when it should");
+        app.inputVariables.NUMPOINTS = 50;
+		assertTrue(app.DECIDE(), "DECIDE did not output true when it should");
 	}
 
     /**
@@ -68,26 +70,26 @@ public class DECIDETest {
 	@Test
 	@DisplayName("Tests DECIDE for positive input.")
 	void DECIDEPositiveTest2() {
-        params.LENGTH1 = 3;
-        params.RADIUS1 = 100.;
-        params.EPSILON = params.PI/2;
-        params.AREA1 = 100;
-        params.Q_PTS = 2;
-        params.QUADS = 1;
-        params.DIST = 1;
-        params.N_PTS = 1;
-        params.K_PTS = 1;
-        params.A_PTS = 1;
-        params.B_PTS = 1;
-        params.C_PTS = 1;
-        params.D_PTS = 1;
-        params.E_PTS = 1;
-        params.F_PTS = 1;
-        params.G_PTS = 1;
-        params.LENGTH2 = 1;
-        params.RADIUS2 = 100;
-        params.AREA2 = 100;
-		globals.POINTS = new Point[] { 
+        app.params.LENGTH1 = 3;
+        app.params.RADIUS1 = 100.;
+        app.params.EPSILON = params.PI/2;
+        app.params.AREA1 = 100;
+        app.params.Q_PTS = 2;
+        app.params.QUADS = 1;
+        app.params.DIST = 1;
+        app.params.N_PTS = 1;
+        app.params.K_PTS = 1;
+        app.params.A_PTS = 1;
+        app.params.B_PTS = 1;
+        app.params.C_PTS = 1;
+        app.params.D_PTS = 1;
+        app.params.E_PTS = 1;
+        app.params.F_PTS = 1;
+        app.params.G_PTS = 1;
+        app.params.LENGTH2 = 1;
+        app.params.RADIUS2 = 100;
+        app.params.AREA2 = 100;
+		app.inputVariables.POINTS = new Point[] { 
             new Point(0, 1), new Point(8, 1), new Point(4, 1), // 0 and 1
             new Point(3, 6), new Point(4, 19), new Point(25, 5), // 2
             new Point(1, 6), new Point(70, 45), new Point(14, 2.32), // 3 
@@ -100,9 +102,10 @@ public class DECIDETest {
             new Point(15.872, 111), new Point(0.3, 762.1456), new Point(14.245, 12431.12), new Point(612.451, -142213.3512) // 12
         };
 		LogicalConnectorMatrix lcm = new LogicalConnectorMatrix();
-		globals.LCM = lcm;
-        globals.NUMPOINTS = 50;
-		assertTrue(App.DECIDE(globals, params), "DECIDE did not output true when it should");
+		app.inputVariables.LCM = lcm;
+        app.inputVariables.NUMPOINTS = 50;
+		assertTrue(app.DECIDE(), "DECIDE did not output true when it should");
+
 	}
     
     /**
@@ -113,6 +116,6 @@ public class DECIDETest {
 	@Test
 	@DisplayName("Tests DECIDE for negative input.")
 	void DECIDENegativeTest() {
-		assertFalse(App.DECIDE(globals, params), "DECIDE did not output true when it should");
+		assertFalse(app.DECIDE(), "DECIDE did not output true when it should");
 	}
 }
