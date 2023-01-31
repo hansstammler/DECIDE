@@ -3,14 +3,11 @@
  */
 package decide;
 
-import com.google.common.base.Strings;
-
-import decide.LogicalConnectorMatrix.LogicalConnector;
-
 public class App {
 
     public InputVariables inputVariables;
     public OutputVariables outputVariables;
+    public Parameters params;
 
     /**
      * Constructor for App class, initializes 
@@ -18,6 +15,7 @@ public class App {
     public App(){
         inputVariables = new InputVariables();
         outputVariables = new OutputVariables();
+        params = new Parameters();
     }
 
     public void initialize(){ //Function for filling inputvariables with stuff. This is only temporary so we can actually run the program.
@@ -25,6 +23,9 @@ public class App {
         inputVariables.initialize();
 
         outputVariables = new OutputVariables();
+
+        params = new Parameters();
+        params.initialize();
 
         //inputVariables.LCM = new LogicalConnectorMatrix('d'); //'r' for random, 'u' for filled with notused
         //inputVariables.LCM.print();
@@ -47,39 +48,84 @@ public class App {
         }*/
     }
 
-    public boolean[] conditionsMetVector(){//REPLACE THIS WITH 2.1
-        return new boolean[15];
+    /**
+     * Task 2.1
+     * The Conditions Met Vector (CMV) is set according to the results of the LIC calculations, i.e.,
+     * CMV[i] is set to true if and only if the ith LIC is met.
+     * @return boolean[15] (CMV)
+     */
+    public boolean[] conditionsMetVector() {
+        boolean[] CMV = new boolean[15];
+        CMV[0] = LICS.zero(inputVariables, params);
+        CMV[1] = LICS.one(inputVariables, params);
+        CMV[2] = LICS.two(inputVariables, params);
+        CMV[3] = LICS.three(inputVariables, params);
+        CMV[4] = LICS.four(inputVariables, params);
+        CMV[5] = LICS.five(inputVariables, params);
+        CMV[6] = LICS.six(inputVariables, params);
+        CMV[7] = LICS.seven(inputVariables, params);
+        CMV[8] = LICS.eight(inputVariables, params);
+        CMV[9] = LICS.nine(inputVariables, params);
+        CMV[10] = LICS.ten(inputVariables, params);
+        CMV[11] = LICS.eleven(inputVariables, params);
+        CMV[12] = LICS.twelve(inputVariables, params);
+        CMV[13] = LICS.thirteen(inputVariables, params);
+        CMV[14] = LICS.fourteen(inputVariables, params);
+        return CMV;
     }
 
-    public boolean[][] preliminaryUnlockingMatrix(){//REPLACE THIS WITH 2.2
-        return new boolean[15][15];
+    /**
+     * Task 2.2
+     * Creates a Preliminary Unlocking Matrix (PUM) from the calculated CMV and given LCM.
+     * @return PUM (equivalent to boolean[15][15])
+     */
+    public PUM preliminaryUnlockingMatrix() {
+        return new PUM(outputVariables.CMV, inputVariables.LCM);
     }
 
-    public boolean[] finalUnlockingVector(){ //REPLACE THIS WITH 2.3
-        return new boolean[15];
+    /**
+     * Task 2.3
+     * The Final Unlocking Vector (FUV) is generated from the calculated PUM and given PUV.
+     * @return FUV (equivalent to boolean[15])
+     */
+    public FUV finalUnlockingVector() {
+        return new FUV(inputVariables.PUV, outputVariables.PUM);
     }
 
-    public String launch(){ //REPLACE THIS WITH 2.4
-        return "NO";
+    /**
+     * Task 2.4
+     * If all values in the FUV are true, the launch-unlock signal "YES" is generated, otherwise "NO".
+     * @return "YES" or "NO"
+     */
+    public String launch() {
+        for (int i = 0; i < 15; i++) if (!outputVariables.FUV.get(i)) return "NO";
+        return "YES";
     }
 
-
-
-    //Not implemented
-    public boolean DECIDE(){
+    /**
+     * Generates the output variables: 
+     * - LAUNCH (final launch decision "YES" or "NO")
+     * - CMV (Conditions Met Vector)
+     * - PUM (Preliminary Unlocking Matrix)
+     * - FUV (Final Unlocking Matrix)
+     * 
+     * In other words, the function:
+     * - will generate a boolean signal which determines whether an interceptor should be launched 
+     * based upon input radar tracking information.
+     * - determines which combination of the several possible LIC’s are relevant to the immediate situation.
+     * - determines whether each of 15 LIC’s is true for an input set (of up to 100 planar data points).
+     */
+    public void DECIDE(){
         outputVariables.CMV = conditionsMetVector();
         outputVariables.PUM = preliminaryUnlockingMatrix();
         outputVariables.FUV = finalUnlockingVector();
         outputVariables.LAUNCH = launch();
-
-        return false;
     }
 
     public static void main(String[] args) {
-
         App app = new App();
         app.initialize();   //This is only temporary, ideally we should parse some input file for this.
-
-        System.out.println(app.DECIDE());
+        app.DECIDE();
+        System.out.println(app.outputVariables.LAUNCH);
     }
 }
