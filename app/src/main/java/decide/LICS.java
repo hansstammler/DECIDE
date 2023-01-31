@@ -24,6 +24,8 @@ public class LICS {
 	}
 	
 	/**
+	 * There exists at least one set of three consecutive data points that cannot all be 
+	 * contained within or on a circle of radius RADIUS1.
 	 * 
 	 * @param globals Instance of InputVariables, gives the state to evaluate
 	 * @param params Instance of parameters
@@ -240,6 +242,15 @@ public class LICS {
 		return false;
 	}
 
+	/**
+	 * There exists at least one set of three data points separated by exactly A PTS and B PTS
+	 * consecutive intervening points, respectively, that cannot be contained within or on a circle of
+	 * radius RADIUS1. The condition is not met when NUMPOINTS < 5
+	 * 
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean eight(InputVariables globals, Parameters params) {
 		if (globals.NUMPOINTS < 5) {
 			return false;
@@ -413,6 +424,19 @@ than AREA1.
 		return false;
 	}
 
+	/**
+	 * There exists at least one set of three data points, separated by exactly E PTS and F PTS 
+	 * consecutive intervening points, respectively, that are the vertices of a triangle with area greater
+	 * than AREA1. In addition, there exist three data points (which can be the same or different
+	 * from the three data points just mentioned) separated by exactly E PTS and F PTS 
+	 * consecutive intervening points, respectively, that are the vertices of a triangle with area 
+	 * less than AREA2. Both parts must be true for the LIC to be true. The condition is not met 
+	 * when NUMPOINTS <5
+	 * 
+	 * @param globals Instance of InputVariables
+	 * @param params Instance of Parameters
+	 * @return true or false
+	 */
 	static boolean fourteen(InputVariables globals, Parameters params) {
 		if (globals.NUMPOINTS < 5) {
 			return false;
