@@ -39,22 +39,31 @@ public class LICSTest {
     }
     
     @Test
-    @DisplayName("LIC 1 shoudl return the correct boolean")
-    void LIC1IsCorrect() {
+    @DisplayName("Tests LIC1 for positive input.")
+    void LIC1positiveTest() {
+        Point[] points2 = {new Point(100000, 0), new Point(25, 0), new Point(10, 0)};
+        globals.NUMPOINTS = points2.length;
+        globals.POINTS = points2;
+        assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
+    }
+
+    @Test
+    @DisplayName("Tests LIC1 for negative input.")
+    void LIC1negativeTest() {
         params.RADIUS1 = 1;
         Point[] points = {new Point(0., 0.), new Point(1., 1.), new Point(0.5, 0.5)};
         globals.POINTS = points;
         globals.NUMPOINTS = points.length;
         assertFalse(LICS.one(globals, params), "LIC1 did not output true when it should");
-
-        Point[] points2 = {new Point(100000, 0), new Point(25, 0), new Point(10, 0)};
-        globals.NUMPOINTS = points2.length;
-        globals.POINTS = points2;
-        assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
+    }
+	
+    @Test
+    @DisplayName("LIC1 should return false for invalid inputs.")
+    void LIC1invalidTest() {
+        params.RADIUS1 = 1;
         
-        globals.POINTS = new Point[]{new Point(0., 0.)};
+		globals.POINTS = new Point[]{new Point(0., 0.)};
         globals.NUMPOINTS = 1;
-
         assertFalse(LICS.one(globals, params));
     }
 
