@@ -256,7 +256,7 @@ public class LICS {
 			return false;
 		}
 		boolean could_bound = true;
-		for (int i = 0; i + params.A_PTS + params.B_PTS + 1 < globals.POINTS.length; i++){
+		for (int i = 0; i + params.A_PTS + params.B_PTS + 2 < globals.POINTS.length; i++){
 			Point a = globals.POINTS[i];
 			Point b = globals.POINTS[i+params.A_PTS + 1];
 			Point c = globals.POINTS[i+params.A_PTS+params.B_PTS + 2];
