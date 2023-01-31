@@ -112,7 +112,14 @@ public class LICSTest {
 		assertFalse(LICS.one(globals, params));
 	}
 
+	/**
+	 * Tests LIC4 condition that if Q_PTS consecutive data points lie in more than
+	 * QUADS quadrants then it should return true.
+	 * 
+	 * @return Needs to evaluate to true.
+	 */
 	@Test
+	@DisplayName("Tests LIC4 for positive input.")
 	void LIC4IsTrueWhenQ_PTSPointsLieInMoreThanQUADSQuadrants() {
 		params.Q_PTS = 2;
 		params.QUADS = 1;
@@ -122,7 +129,14 @@ public class LICSTest {
 				"LIC4 should output true when Q_PTS consecutive data points lie in more than QUADS quadrants");
 	}
 
+	/**
+	 * Tests LIC4 condition that if Q_PTS consecutive data points does not lie in more 
+	 * than QUADS quadrants then it should return false.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
+	@DisplayName("Tests LIC4 for negative input.")
 	void LIC4IsFalseWhenQ_PTSPointsLieInLessThanQUADSQuadrants() {
 		params.Q_PTS = 2;
 		params.QUADS = 2;
@@ -171,7 +185,14 @@ public class LICSTest {
 		assertTrue(LICS.two(globals, params), "LIC2 did not output true when angle < PI - EPSILON.");
 	}
 
+	/**
+	 * Tests LIC3 condition that if the area of a trinagle created by three consecutive data points
+	 * is greater than AREA1 it should return true.
+	 * 
+	 * @return Needs to evaluate to true.
+	 */
 	@Test
+	@DisplayName("Tests LIC3 for positive input.")
 	void LIC3IsTrueWhenAreaIsGreaterThanAREA1() {
 		Point[] points = { new Point(1, 0), new Point(1, 5), new Point(2, 0), new Point(4, 0), new Point(5, 0) };
 		globals.POINTS = points;
@@ -179,7 +200,14 @@ public class LICSTest {
 		assertTrue(LICS.three(globals, params), "LIC3 should output true when area is greater than AREA1");
 	}
 
+	/**
+	 * Tests LIC3 condition that if the area of a trinagle created by three consecutive data points
+	 * is equal to AREA1 it should return false.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
+	@DisplayName("Tests LIC3 for negative input.")
 	void LIC3IsFalseWhenAreaIsEqualToAREA1() {
 		Point[] points = { new Point(0, 0), new Point(2, 0), new Point(0, 2) };
 		globals.POINTS = points;
@@ -187,7 +215,14 @@ public class LICSTest {
 		assertFalse(LICS.three(globals, params), "LIC3 should output false when area is equal to AREA1");
 	}
 
+	/**
+	 * Tests LIC3 condition that if the area of a trinagle created by three consecutive data points
+	 * is lesser than  AREA1 it should return false.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
+	@DisplayName("Tests LIC3 for negative input.")
 	void LIC3IsFalseWhenAreaIsLesserThanAREA1() {
 		Point[] points = { new Point(1, 0), new Point(1, 5), new Point(2, 0), new Point(4, 0), new Point(5, 0) };
 		globals.POINTS = points;
@@ -645,7 +680,19 @@ public class LICSTest {
 		assertTrue(LICS.thirteen(globals, params), "LIC13 did not output true when it should");
 	}
 
+	/**
+	 * Tests LIC14 conditions: 
+	 * 1. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is greater than AREA1
+	 * 2. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is lesser than AREA2
+	 * 3. NUMPOINTS >= 5
+	 * then it should return true
+	 * 
+	 * @return Needs to evaluate to true.
+	 */
 	@Test
+	@DisplayName("Tests LIC14 for positive input.")
 	void LIC14IsTrueWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
@@ -659,7 +706,19 @@ public class LICSTest {
 				"LIC14 should output true when one set of three data points, separated by exactly E PTS and F PTS consecutive intervening points form a triangle > AREA1 and another triangle < AREA2");
 	}
 
+	/**
+	 * Tests LIC14 conditions: 
+	 * 1. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is greater than AREA1
+	 * 2. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is lesser than AREA2
+	 * 3. NUMPOINTS >= 5
+	 * then it should return true
+	 * 
+	 * @return Needs to evaluate to true.
+	 */
 	@Test
+	@DisplayName("Tests LIC14 for positive input.")
 	void LIC14IsTrueWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2Simple() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
@@ -672,7 +731,19 @@ public class LICSTest {
 				"LIC14 should output true when one set of three data points, separated by exactly E PTS and F PTS consecutive intervening points form a triangle > AREA1 and another triangle < AREA2");
 	}
 
+	/**
+	 * Tests LIC14 conditions: 
+	 * 1. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is LESSER than AREA1
+	 * 2. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is lesser than AREA2
+	 * 3. NUMPOINTS >= 5
+	 * then it should return false
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
+	@DisplayName("Tests LIC14 for negative input.")
 	void LIC14IsFalseWhenAreaOneIsLesserThanAREA1AndAreaTwoLesserThanAREA2() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
@@ -685,7 +756,19 @@ public class LICSTest {
 		assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 fails and 2 holds");
 	}
 
+	/**
+	 * Tests LIC14 conditions: 
+	 * 1. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is greater than AREA1
+	 * 2. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is GREATER than AREA2
+	 * 3. NUMPOINTS >= 5
+	 * then it should return false
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
+	@DisplayName("Tests LIC14 for negative input.")
 	void LIC14IsFalseWhenAreaOneIsGreaterThanAREA1AndAreaTwoGreaterThanAREA2() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
@@ -698,7 +781,19 @@ public class LICSTest {
 		assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 holds and 2 fails");
 	}
 
+	/**
+	 * Tests LIC14 conditions: 
+	 * 1. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is LESSER than AREA1
+	 * 2. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is GREATER than AREA2
+	 * 3. NUMPOINTS >= 5
+	 * then it should return false
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
+	@DisplayName("Tests LIC14 for negative input.")
 	void LIC14IsFalseWhenAreaOneIsLesserThanAREA1AndAreaTwoGreaterThanAREA2() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
@@ -711,7 +806,19 @@ public class LICSTest {
 		assertFalse(LICS.fourteen(globals, params), "LIC14 should output false when condition 1 fails and 2 fails");
 	}
 
+	/**
+	 * Tests LIC14 conditions: 
+	 * 1. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is greater than AREA1
+	 * 2. if the area of a trinagle created by three consecutive data points separated by exaclty 
+	 * E_PTS and F_PTS respectively is lesser than AREA2
+	 * 3. NUMPOINTS < 5
+	 * then it should return false
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
+	@DisplayName("Tests LIC14 for negative input.")
 	void LIC14IsFalseWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2ButNUMPOINTSLessThan5() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
