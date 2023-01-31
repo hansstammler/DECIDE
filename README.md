@@ -32,8 +32,9 @@ Jesper Slagarp:
 - Refactoring
 
 Linnéa Gustafsson:
-- temp
-- temp
+- LIC2, LIC9, LIC12
+- Implementation of DECIDE
+- Review of code with respect to requirements
 
 Oscar Olsson: 
 - LIC3, LIC4, LIC14
