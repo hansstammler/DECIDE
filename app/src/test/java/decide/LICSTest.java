@@ -16,25 +16,53 @@ public class LICSTest {
 		params = new Parameters();
 	}
 
+	/**
+	 * Tests LIC0 condition, i.e. there exists at least one set of two consecutive data points that are a distance greater than
+	 * the length, LENGTH1, apart.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
-	@DisplayName("LIC 0 should return correct boolean")
-	void LIC0IsCorrect() {
+	@DisplayName("Tests LIC0 for negative input.")
+	void LIC0NegativeTest() {
 		params.LENGTH1 = 2;
-
 		Point[] points = { new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(4, 4), new Point(5, 5) };
 		globals.POINTS = points;
 		globals.NUMPOINTS = points.length;
 		assertFalse(LICS.zero(globals, params), "LIC 0 did not output false when it should");
+	}
 
+	/**
+	 * Tests LIC0 condition, i.e. there exists at least one set of two consecutive data points that are a distance greater than
+	 * the length, LENGTH1, apart.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
+	@Test
+	@DisplayName("Tests LIC1 for positive input.")
+	void LIC0PositiveTest() {
+		params.LENGTH1 = 2;
 		Point[] points2 = { new Point(1, 1), new Point(2, 2), new Point(3, 7) };
 		globals.POINTS = points2;
 		globals.NUMPOINTS = points2.length;
 		assertTrue(LICS.zero(globals, params), "LIC 0 did not output true when it should");
+	}
 
+	/**
+	 * Tests LIC0 condition with invalid input.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
+	@Test
+	@DisplayName("Tests LIC1 for positive input.")
+	void LIC0InvalidTest() {
 		params.LENGTH1 = -1;
-		globals.POINTS = points;
+		Point[] points2 = { new Point(1, 1), new Point(2, 2), new Point(3, 7) };
+		globals.POINTS = points2;
+		globals.NUMPOINTS = points2.length;
 		assertFalse(LICS.zero(globals, params), "LIC 0 did not output false when it should");
 	}
+
 
 	/**
 	 * Tests LIC1 condition, i.e. there exists at least three consecutive
