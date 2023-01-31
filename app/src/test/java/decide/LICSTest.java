@@ -235,7 +235,7 @@ public class LICSTest {
 	 * @return Needs to evaluate to false.
 	 */
 	@Test
-	@DisplayName("LIC 10 should return the correct boolean")
+	@DisplayName("Tests LIC for negative input.")
 	void LIC10negativeCase() {
 		params.AREA1 = 0.5;
 		params.E_PTS = 1;
