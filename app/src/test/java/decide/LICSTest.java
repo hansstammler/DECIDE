@@ -162,7 +162,14 @@ public class LICSTest {
 		globals.NUMPOINTS = points2.length;
 		assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
 	}
-
+	
+	/**
+	 * Tests the inverse of the LIC8 condition, as described in the assignment on
+	 * p4. It uses points
+	 * that are very close together and a comparably small radius.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
 	@DisplayName("Tests LIC8 for negative input.")
 	void LIC8negativeTest() {
