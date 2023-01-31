@@ -6,9 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
-
 public class LICSTest {
-
     InputVariables globals;
     Parameters params;
 
@@ -38,25 +36,53 @@ public class LICSTest {
         assertFalse(LICS.zero(globals, params), "LIC 0 did not output false when it should");
     }
     
-    @Test
-    @DisplayName("LIC 1 shoudl return the correct boolean")
-    void LIC1IsCorrect() {
-        params.RADIUS1 = 1;
-        Point[] points = {new Point(0., 0.), new Point(1., 1.), new Point(0.5, 0.5)};
-        globals.POINTS = points;
-        globals.NUMPOINTS = points.length;
-        assertFalse(LICS.one(globals, params), "LIC1 did not output true when it should");
+    /**
+	 * Tests LIC1 condition, i.e. there exists at least three consecutive
+	 * points that cannot be cointained in a circle of radius 1.
+	 * 
+	 * @return Needs to evaluate to true.
+	 */
+	@Test
+	@DisplayName("Tests LIC1 for positive input.")
+	void LIC1positiveTest() {
+		Point[] points2 = { new Point(100000, 0), new Point(25, 0), new Point(10, 0) };
+		globals.NUMPOINTS = points2.length;
+		globals.POINTS = points2;
+		params.RADIUS1 = 1;
+		assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
+	}
 
-        Point[] points2 = {new Point(100000, 0), new Point(25, 0), new Point(10, 0)};
-        globals.NUMPOINTS = points2.length;
-        globals.POINTS = points2;
-        assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
-        
-        globals.POINTS = new Point[]{new Point(0., 0.)};
-        globals.NUMPOINTS = 1;
+	/**
+	 * Tests the inverse of the LIC1 condition, i.e. all three consecutive
+	 * points can be contained in a circle of size 1.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
+	@Test
+	@DisplayName("Tests LIC1 for negative input.")
+	void LIC1negativeTest() {
+		params.RADIUS1 = 1;
+		Point[] points = { new Point(0., 0.), new Point(1., 1.), new Point(0.5, 0.5) };
+		globals.POINTS = points;
+		globals.NUMPOINTS = points.length;
+		assertFalse(LICS.one(globals, params), "LIC1 did not output true when it should");
+	}
 
-        assertFalse(LICS.one(globals, params));
-    }
+	/**
+	 * Tests LIC1 with invalid input. The test data contains two points that are at
+	 * the same spot. It should return false.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
+	@Test
+	@DisplayName("LIC1 should return false for invalid inputs.")
+	void LIC1invalidTest() {
+		params.RADIUS1 = 1;
+
+		globals.POINTS = new Point[] { new Point(0., 0.), new Point(0., 0.) };
+		globals.NUMPOINTS = 2;
+		assertFalse(LICS.one(globals, params));
+	}
 
     @Test
     void LIC4IsTrueWhenQ_PTSPointsLieInMoreThanQUADSQuadrants() {
