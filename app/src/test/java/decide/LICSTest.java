@@ -210,7 +210,20 @@ public class LICSTest {
 
 	@Test
 	@DisplayName("LIC 10 should return the correct boolean")
-	void LIC10IsCorrect() {
+	void LIC10positiveCase() {
+		params.AREA1 = 0.5;
+		params.E_PTS = 1;
+		params.F_PTS = 1;
+
+		Point[] points2 = { new Point(0, 0), new Point(0, 0), new Point(1, 0), new Point(1.5, 2), new Point(3, 0) };
+		globals.POINTS = points2;
+		globals.NUMPOINTS = points2.length;
+		assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
+	}
+
+	@Test
+	@DisplayName("LIC 10 should return the correct boolean")
+	void LIC10negativeCase() {
 		params.AREA1 = 0.5;
 		params.E_PTS = 1;
 		params.F_PTS = 1;
@@ -219,11 +232,6 @@ public class LICSTest {
 		globals.POINTS = points;
 		globals.NUMPOINTS = points.length;
 		assertFalse(LICS.one(globals, params), "LIC1 did not output false when it should");
-
-		Point[] points2 = { new Point(0, 0), new Point(0, 0), new Point(1, 0), new Point(1.5, 2), new Point(3, 0) };
-		globals.POINTS = points2;
-		globals.NUMPOINTS = points2.length;
-		assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
 	}
 
 	/**
