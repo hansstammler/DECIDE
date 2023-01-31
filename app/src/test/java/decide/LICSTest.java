@@ -120,7 +120,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC4 for positive input.")
-	void LIC4IsTrueWhenQ_PTSPointsLieInMoreThanQUADSQuadrants() {
+	void LIC4PositiveTest() {
 		params.Q_PTS = 2;
 		params.QUADS = 1;
 		Point[] points = { new Point(1, 1), new Point(-1, 2), new Point(0.5, 0.5) };
@@ -137,7 +137,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC4 for negative input.")
-	void LIC4IsFalseWhenQ_PTSPointsLieInLessThanQUADSQuadrants() {
+	void LIC4negativeTest() {
 		params.Q_PTS = 2;
 		params.QUADS = 2;
 		Point[] points = { new Point(1, 1), new Point(1, 2), new Point(0.5, 0.5) };
@@ -193,7 +193,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC3 for positive input.")
-	void LIC3IsTrueWhenAreaIsGreaterThanAREA1() {
+	void LIC3positiveTest() {
 		Point[] points = { new Point(1, 0), new Point(1, 5), new Point(2, 0), new Point(4, 0), new Point(5, 0) };
 		globals.POINTS = points;
 		params.AREA1 = 2;
@@ -208,7 +208,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC3 for negative input.")
-	void LIC3IsFalseWhenAreaIsEqualToAREA1() {
+	void LIC3NegativeTest1() {
 		Point[] points = { new Point(0, 0), new Point(2, 0), new Point(0, 2) };
 		globals.POINTS = points;
 		params.AREA1 = 2;
@@ -223,7 +223,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC3 for negative input.")
-	void LIC3IsFalseWhenAreaIsLesserThanAREA1() {
+	void LIC3NegativeTest2() {
 		Point[] points = { new Point(1, 0), new Point(1, 5), new Point(2, 0), new Point(4, 0), new Point(5, 0) };
 		globals.POINTS = points;
 		params.AREA1 = 10;
@@ -693,7 +693,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC14 for positive input.")
-	void LIC14IsTrueWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2() {
+	void LIC14PositiveTest1() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
 		params.AREA1 = 1.5;
@@ -719,7 +719,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC14 for positive input.")
-	void LIC14IsTrueWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2Simple() {
+	void LIC14PositiveTest2() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
 		params.AREA1 = 1;
@@ -744,7 +744,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC14 for negative input.")
-	void LIC14IsFalseWhenAreaOneIsLesserThanAREA1AndAreaTwoLesserThanAREA2() {
+	void LIC14NegativeTest1() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
 		params.AREA1 = 3;
@@ -769,7 +769,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC14 for negative input.")
-	void LIC14IsFalseWhenAreaOneIsGreaterThanAREA1AndAreaTwoGreaterThanAREA2() {
+	void LIC14NegativeTest2() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
 		params.AREA1 = 1.5;
@@ -794,7 +794,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC14 for negative input.")
-	void LIC14IsFalseWhenAreaOneIsLesserThanAREA1AndAreaTwoGreaterThanAREA2() {
+	void LIC14NegativeTest3() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
 		params.AREA1 = 3;
@@ -819,7 +819,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC14 for negative input.")
-	void LIC14IsFalseWhenAreaOneIsGreaterThanAREA1AndAreaTwoLesserThanAREA2ButNUMPOINTSLessThan5() {
+	void LIC14NegativeTest4() {
 		params.E_PTS = 1;
 		params.F_PTS = 1;
 		params.AREA1 = 1.5;
