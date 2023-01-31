@@ -39,7 +39,7 @@ public class LICSTest {
 	 * @return Needs to evaluate to false.
 	 */
 	@Test
-	@DisplayName("Tests LIC1 for positive input.")
+	@DisplayName("Tests LIC0 for positive input.")
 	void LIC0PositiveTest() {
 		params.LENGTH1 = 2;
 		Point[] points2 = { new Point(1, 1), new Point(2, 2), new Point(3, 7) };
@@ -54,7 +54,7 @@ public class LICSTest {
 	 * @return Needs to evaluate to false.
 	 */
 	@Test
-	@DisplayName("Tests LIC1 for positive input.")
+	@DisplayName("Tests LIC0 for invalid input.")
 	void LIC0InvalidTest() {
 		params.LENGTH1 = -1;
 		Point[] points2 = { new Point(1, 1), new Point(2, 2), new Point(3, 7) };
@@ -368,23 +368,60 @@ public class LICSTest {
 		assertTrue(LICS.five(globals, params), "LIC5 did not output true when it should");
 	}
 
+	/**
+	 * Tests LIC6 condition, i.e. There exists at least one set of N PTS consecutive data points such that at least one of the
+	 * points lies a distance greater than DIST from the line joining the first and last of these N PTS
+	 * points. If the first and last points of these N PTS are identical, then the calculated distance
+	 * to compare with DIST will be the distance from the coincident point to all other points of
+	 * the N PTS consecutive points. The condition is not met when NUMPOINTS < 3.
+	 * (3 ≤ N PTS ≤ NUMPOINTS), (0 ≤ DIST)
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
-	@DisplayName("LIC 6 should return correct boolean")
-	void LIC6IsCorrect() {
+	@DisplayName("Tests LIC6 for negative input.")
+	void LIC6NegativeTest1() {
 		Point[] points1 = { new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0) };
 		params.N_PTS = 3;
 		params.DIST = 1.5;
 		globals.POINTS = points1;
 		globals.NUMPOINTS = points1.length;
 		assertFalse(LICS.six(globals, params), "LIC6 did not output false when it should");
+	}
+	@Test
+	@DisplayName("Tests LIC6 for negative input.")
+	void LIC6NegativeTest2() {
+		Point[] points4 = { new Point(4, 4), new Point(2, 3), new Point(4, 4), new Point(4, 5), new Point(5, 6) };
+		params.N_PTS = 3;
+		params.DIST = 10;
+		globals.POINTS = points4;
+		globals.NUMPOINTS = points4.length;
+		assertFalse(LICS.six(globals, params), "LIC6 did not output false when it should");
+	}
 
+	/**
+	 * Tests LIC6 condition, i.e. There exists at least one set of N PTS consecutive data points such that at least one of the
+	 * points lies a distance greater than DIST from the line joining the first and last of these N PTS
+	 * points. If the first and last points of these N PTS are identical, then the calculated distance
+	 * to compare with DIST will be the distance from the coincident point to all other points of
+	 * the N PTS consecutive points. The condition is not met when NUMPOINTS < 3.
+	 * (3 ≤ N PTS ≤ NUMPOINTS), (0 ≤ DIST)
+	 * 
+	 * @return Needs to evaluate to true.
+	 */
+	@Test
+	@DisplayName("Tests LIC6 for positive input.")
+	void LIC6PositiveTest1() {
 		Point[] points2 = { new Point(1, 1), new Point(2, 2), new Point(3, 20), new Point(4, 4), new Point(5, 5) };
 		params.N_PTS = 3;
 		params.DIST = 5;
 		globals.POINTS = points2;
 		globals.NUMPOINTS = points2.length;
 		assertTrue(LICS.six(globals, params), "LIC6 did not output true when it should");
-
+	}
+	@Test
+	@DisplayName("Tests LIC6 for positive input.")
+	void LIC6PositiveTest2() {
 		Point[] points3 = { new Point(4, 4), new Point(2, 3), new Point(4, 4), new Point(4, 5), new Point(5, 6) };
 		params.N_PTS = 3;
 		params.DIST = 1.5;
@@ -392,19 +429,24 @@ public class LICSTest {
 		globals.NUMPOINTS = points3.length;
 		assertTrue(LICS.six(globals, params), "LIC6 did not output true when it should");
 
-		Point[] points4 = { new Point(4, 4), new Point(2, 3), new Point(4, 4), new Point(4, 5), new Point(5, 6) };
-		params.N_PTS = 3;
-		params.DIST = 10;
-		globals.POINTS = points4;
-		globals.NUMPOINTS = points4.length;
-		assertFalse(LICS.six(globals, params), "LIC6 did not output false when it should");
+	}
 
+	/**
+	 * Tests LIC6 condition with invalid input.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
+	@Test
+	@DisplayName("Tests LIC6 for invalid input.")
+	void LIC6InvalidTest() {
+		Point[] points3 = { new Point(4, 4), new Point(2, 3), new Point(4, 4), new Point(4, 5), new Point(5, 6) };
 		params.N_PTS = 2;
 		params.DIST = 1.5;
 		globals.POINTS = points3;
 		globals.NUMPOINTS = points3.length;
 		assertFalse(LICS.six(globals, params), "LIC6 did not output false when it should");
 	}
+
 
 	@Test
 	@DisplayName("LIC 7 should return correct boolean")
