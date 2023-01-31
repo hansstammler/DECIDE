@@ -447,24 +447,53 @@ public class LICSTest {
 		assertFalse(LICS.six(globals, params), "LIC6 did not output false when it should");
 	}
 
-
+	/**
+	 * Tests LIC7 condition, i.e. There exists at least one set of two data points separated by exactly K PTS consecutive in-
+ 	 * tervening points that are a distance greater than the length, LENGTH1, apart. The condition
+	 * is not met when NUMPOINTS < 3.
+	 * 1 ≤ K PTS ≤ (NUMPOINTS − 2)
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
-	@DisplayName("LIC 7 should return correct boolean")
-	void LIC7IsCorrect() {
-		Point[] points1 = { new Point(2, 3), new Point(4, 5), new Point(6, 7), new Point(8, 9), new Point(10, 11) };
-		params.K_PTS = 2;
-		params.LENGTH1 = 2.0;
-		globals.POINTS = points1;
-		globals.NUMPOINTS = points1.length;
-		assertTrue(LICS.seven(globals, params), "LIC7 did not output true when it should");
-
+	@DisplayName("Tests LIC7 for negative input.")
+	void LIC7NegativeTest() {
 		Point[] points2 = { new Point(2, 3), new Point(4, 5), new Point(6, 7), new Point(8, 9), new Point(10, 11) };
 		params.K_PTS = 4;
 		params.LENGTH1 = 4;
 		globals.POINTS = points2;
 		globals.NUMPOINTS = points2.length;
 		assertFalse(LICS.seven(globals, params), "LIC7 did not output false when it should");
+	}
 
+	/**
+	 * Tests LIC7 condition, i.e. There exists at least one set of two data points separated by exactly K PTS consecutive in-
+ 	 * tervening points that are a distance greater than the length, LENGTH1, apart. The condition
+	 * is not met when NUMPOINTS < 3.
+	 * 1 ≤ K PTS ≤ (NUMPOINTS − 2)
+	 * 
+	 * @return Needs to evaluate to true.
+	 */
+	@Test
+	@DisplayName("Tests LIC7 for positive input.")
+	void LIC7PositiveTest() {
+		Point[] points1 = { new Point(2, 3), new Point(4, 5), new Point(6, 7), new Point(8, 9), new Point(10, 11) };
+		params.K_PTS = 2;
+		params.LENGTH1 = 2.0;
+		globals.POINTS = points1;
+		globals.NUMPOINTS = points1.length;
+		assertTrue(LICS.seven(globals, params), "LIC7 did not output true when it should");
+	}
+
+	/**
+	 * Tests LIC7 condition with invalid input.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
+	@Test
+	@DisplayName("Tests LIC7 for invalid input.")
+	void LIC7InvalidTest() {
+		Point[] points1 = { new Point(2, 3), new Point(4, 5), new Point(6, 7), new Point(8, 9), new Point(10, 11) };
 		params.K_PTS = 0;
 		params.LENGTH1 = 2.0;
 		globals.POINTS = points1;
