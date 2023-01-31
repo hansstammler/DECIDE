@@ -162,7 +162,7 @@ public class LICSTest {
 		globals.NUMPOINTS = points2.length;
 		assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
 	}
-	
+
 	/**
 	 * Tests the inverse of the LIC8 condition, as described in the assignment on
 	 * p4. It uses points
@@ -208,8 +208,15 @@ public class LICSTest {
 		assertTrue(LICS.two(globals, params), "LIC9 did not output true when angle < PI - EPSILON.");
 	}
 
+	/**
+	 * Tests the LIC10 condition, as described in the assignment on
+	 * p4. It uses points
+	 * that construct such a triangle with an area greater than 0.5.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
-	@DisplayName("LIC 10 should return the correct boolean")
+	@DisplayName("Tests LIC for positive input.")
 	void LIC10positiveCase() {
 		params.AREA1 = 0.5;
 		params.E_PTS = 1;
