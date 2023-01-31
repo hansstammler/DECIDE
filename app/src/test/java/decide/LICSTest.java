@@ -69,13 +69,19 @@ public class LICSTest {
 		assertFalse(LICS.one(globals, params), "LIC1 did not output true when it should");
 	}
 
+	/**
+	 * Tests LIC1 with invalid input. The test data contains two points that are at
+	 * the same spot. It should return false.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
 	@DisplayName("LIC1 should return false for invalid inputs.")
 	void LIC1invalidTest() {
 		params.RADIUS1 = 1;
 
-		globals.POINTS = new Point[] { new Point(0., 0.) };
-		globals.NUMPOINTS = 1;
+		globals.POINTS = new Point[] { new Point(0., 0.), new Point(0., 0.) };
+		globals.NUMPOINTS = 2;
 		assertFalse(LICS.one(globals, params));
 	}
 
