@@ -228,6 +228,12 @@ public class LICSTest {
 		assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
 	}
 
+	/**
+	 * Tests the inverse of the LIC10 condition, as described in the assignment on
+	 * p4. It uses points hat construct a triangle with an area smaller than 0.5.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
 	@DisplayName("LIC 10 should return the correct boolean")
 	void LIC10negativeCase() {
