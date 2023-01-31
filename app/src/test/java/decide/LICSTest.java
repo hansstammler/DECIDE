@@ -53,6 +53,12 @@ public class LICSTest {
 		assertTrue(LICS.one(globals, params), "LIC1 did not output true when it should");
 	}
 
+	/**
+	 * Tests the inverse of the LIC1 condition, i.e. all three consecutive
+	 * points can be contained in a circle of size 1.
+	 * 
+	 * @return Needs to evaluate to false.
+	 */
 	@Test
 	@DisplayName("Tests LIC1 for negative input.")
 	void LIC1negativeTest() {
