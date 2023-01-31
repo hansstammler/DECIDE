@@ -39,6 +39,6 @@ Oscar Olsson:
 - Javadoc to PDF and make sure all LICs have proper Javadoc
 
 Simon Marco Grunwald:
-- LIC1, LIC8, LIC13
+- LIC1, LIC8, LIC10
 - Implementation of PUM
 - Github Troubleshooting
