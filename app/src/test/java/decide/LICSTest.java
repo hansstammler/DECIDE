@@ -143,8 +143,14 @@ public class LICSTest {
 		assertFalse(LICS.three(globals, params), "LIC3 should output false when area is lesser than AREA1");
 	}
 
+	/**
+	 * Tests LIC8 condition, as described in the assignment on p4. It uses points
+	 * that are very far away together with a comparably small radius.
+	 * 
+	 * @return Needs to evaluate to true.
+	 */
 	@Test
-	@DisplayName("LIC 8 shoudl return the correct boolean")
+	@DisplayName("Tests LIC8 for positive input.")
 	void LIC8positiveTest() {
 		params.RADIUS1 = 10;
 		params.A_PTS = 1;
@@ -158,7 +164,7 @@ public class LICSTest {
 	}
 
 	@Test
-	@DisplayName("LIC 8 shoudl return the correct boolean")
+	@DisplayName("Tests LIC8 for negative input.")
 	void LIC8negativeTest() {
 		params.RADIUS1 = 10;
 		params.A_PTS = 1;
