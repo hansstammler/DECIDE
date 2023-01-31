@@ -235,7 +235,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("LIC 5 should return false for negative instance")
-	void LIC5IsNegative() {
+	void LIC5NegativeTest() {
 		Point[] points = { new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(4, 0), new Point(5, 0) };
 		globals.POINTS = points;
 		assertFalse(LICS.five(globals, params), "LIC5 did not output false when it should");
@@ -249,7 +249,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("LIC 5 should return true for positive instance")
-	void LIC5IsPositive() {
+	void LIC5PositiveTest() {
 		Point[] points = { new Point(1, 0), new Point(2, 0), new Point(3, 0), new Point(5, 0), new Point(4, 0) };
 		globals.POINTS = points;
 		assertTrue(LICS.five(globals, params), "LIC5 did not output true when it should");
@@ -325,7 +325,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("LIC 11 should return false for negative instance")
-	void LIC11IsNegative() {
+	void LIC11NegativeTest() {
 		globals.NUMPOINTS = 5;
 		params.G_PTS = 2;
 
@@ -342,7 +342,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("LIC 11 should return true for positive instance")
-	void LIC11IsPositive() {
+	void LIC11PositiveTest() {
 		globals.NUMPOINTS = 5;
 		params.G_PTS = 2;
 
@@ -388,7 +388,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("LIC 13 should return false for negative instance")
-	void LIC13IsNegative() {
+	void LIC13NegativeTest() {
 		globals.NUMPOINTS = 5;
 		params.A_PTS = 1;
 		params.B_PTS = 1;
@@ -410,7 +410,7 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("LIC 13 should return true for positive instance")
-	void LIC13IsPositive() {
+	void LIC13PositiveTest() {
 		globals.NUMPOINTS = 5;
 		params.A_PTS = 1;
 		params.B_PTS = 1;
