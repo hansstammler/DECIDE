@@ -35,8 +35,8 @@ Linnéa Gustafsson:
 - temp
 
 Oscar Olsson: 
-- temp
-- temp
+- LIC3, LIC4, LIC14
+- Javadoc to PDF and make sure all LICs have proper Javadoc
 
 Simon Marco Grunwald:
 - LIC1, LIC8, LIC13
