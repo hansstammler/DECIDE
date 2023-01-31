@@ -1,5 +1,7 @@
 package decide;
 
+import decide.LogicalConnectorMatrix.LogicalConnector;
+
 public class PUM {
 	boolean[] CMV;
 	LogicalConnectorMatrix LCM;
@@ -21,7 +23,7 @@ public class PUM {
 	 * @param 'j' Second matrix index to LCM and vector index to CMV.
      */
 	boolean get(int i, int j) {
-		var op = LCM.get(i, j);
+		LogicalConnector op = LCM.get(i, j);
 		switch (op) {
 			case ANDD:
 				return this.CMV[i] && this.CMV[j];
