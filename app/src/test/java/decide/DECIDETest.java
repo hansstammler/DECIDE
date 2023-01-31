@@ -7,14 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
 public class DECIDETest {
-	InputVariables globals;
-	Parameters params;
+	//InputVariables globals;
+	//Parameters params;
     App app;
 
 	@BeforeEach
 	void setUp() {
-		globals = new InputVariables();
-		params = new Parameters();
+		//globals = new InputVariables();
+		//params = new Parameters();
         app = new App();
 	}
 
@@ -28,7 +28,7 @@ public class DECIDETest {
 	void DECIDEPositiveTest1() {
         app.params.LENGTH1 = 2;
         app.params.RADIUS1 = 0.5;
-        app.params.EPSILON = params.PI/2;
+        app.params.EPSILON = app.params.PI/2;
         app.params.AREA1 = 2;
         app.params.Q_PTS = 3;
         app.params.QUADS = 2;
@@ -72,7 +72,7 @@ public class DECIDETest {
 	void DECIDEPositiveTest2() {
         app.params.LENGTH1 = 3;
         app.params.RADIUS1 = 100.;
-        app.params.EPSILON = params.PI/2;
+        app.params.EPSILON = app.params.PI/2;
         app.params.AREA1 = 100;
         app.params.Q_PTS = 2;
         app.params.QUADS = 1;
