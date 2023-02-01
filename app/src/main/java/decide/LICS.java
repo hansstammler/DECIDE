@@ -114,18 +114,18 @@ public class LICS {
 		int numberOfQuadrants = 0;
 		for (int j = 0; j < globals.POINTS.length - (params.Q_PTS - 1); j++) {
 			for (int i = 0; i < params.Q_PTS; i++) {
-				if (globals.POINTS[i].x >= 0) {
-					if (globals.POINTS[i].y >= 0) {
+				if (globals.POINTS[i + j].x >= 0) {
+					if (globals.POINTS[i + j].y >= 0) {
 						inQuadrant[1] = true;
 					} else {
-						if (globals.POINTS[i].x == 0) {
+						if (globals.POINTS[i + j].x == 0) {
 							inQuadrant[3] = true;
 						} else {
 							inQuadrant[4] = true;
 						}
 					}
 				} else {
-					if (globals.POINTS[i].y >= 0) {
+					if (globals.POINTS[i + j].y >= 0) {
 						inQuadrant[2] = true;
 					} else {
 						inQuadrant[3] = true;
