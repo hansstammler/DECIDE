@@ -17,8 +17,8 @@ public class App {
         outputVariables = new OutputVariables();
         params = new Parameters();
     }
-
-    public void initialize(){ //Function for filling inputvariables with stuff. This is only temporary so we can actually run the program.
+    //Function for filling inputvariables with stuff. This is only temporary so we can actually run the program.
+    public void initialize(){ 
         inputVariables = new InputVariables();
         inputVariables.initialize();
 
@@ -26,26 +26,6 @@ public class App {
 
         params = new Parameters();
         params.initialize();
-
-        //inputVariables.LCM = new LogicalConnectorMatrix('d'); //'r' for random, 'u' for filled with notused
-        //inputVariables.LCM.print();
-        
-        //Example of how to use LCM
-        /*
-        LogicalConnector[] lc = inputVariables.LCM.getRow(0);
-        for(LogicalConnector l: lc) {
-            switch (l){
-                case NOTUSED:
-                    System.out.print("NOTUSED");
-                    break;
-                case ANDD:
-                    System.out.print("ANDD   ");
-                    break;
-                case ORR:
-                    System.out.print("ORR    ");
-                    break;
-            }
-        }*/
     }
 
     /**
@@ -115,11 +95,14 @@ public class App {
      * - determines which combination of the several possible LIC’s are relevant to the immediate situation.
      * - determines whether each of 15 LIC’s is true for an input set (of up to 100 planar data points).
      */
-    public void DECIDE(){
+    public boolean DECIDE(){
         outputVariables.CMV = conditionsMetVector();
         outputVariables.PUM = preliminaryUnlockingMatrix();
         outputVariables.FUV = finalUnlockingVector();
         outputVariables.LAUNCH = launch();
+
+        if(outputVariables.LAUNCH.compareTo("YES") == 0) return true;
+        return false;
     }
 
     public static void main(String[] args) {
