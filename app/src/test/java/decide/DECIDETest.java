@@ -19,7 +19,9 @@ public class DECIDETest {
 	}
 
     /**
-	 * Tests DECIDE on input that should return true
+	 * Tests DECIDE on input and parameters that should result in a launch.
+     * The LCM is randomly generated but all LICS are true and all elements
+     * in the PUV is false, which should result in a launch.
 	 * 
 	 * @return Needs to evaluate to true.
 	 */
@@ -61,6 +63,9 @@ public class DECIDETest {
 		LogicalConnectorMatrix lcm = new LogicalConnectorMatrix('r');
         app.inputVariables.LCM = lcm;
         boolean[] puv = new boolean[15];
+        for (int i = 0; i < 15; i++) {
+            puv[i] = false;
+        }
         app.inputVariables.PUV = puv;
 
 		assertTrue(app.DECIDE(), "DECIDE did not output true when it should");
