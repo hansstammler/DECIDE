@@ -58,6 +58,11 @@ public class DECIDETest {
             new Point(0.1, 0), new Point(0.3, 4.3), new Point(4.2, 0.12), new Point(2.5, 0) // 12
         };
         app.inputVariables.NUMPOINTS = 50;
+		LogicalConnectorMatrix lcm = new LogicalConnectorMatrix('r');
+        app.inputVariables.LCM = lcm;
+        boolean[] puv = new boolean[15];
+        app.inputVariables.PUV = puv;
+
 		assertTrue(app.DECIDE(), "DECIDE did not output true when it should");
 	}
 
