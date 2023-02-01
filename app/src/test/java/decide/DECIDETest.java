@@ -124,13 +124,53 @@ public class DECIDETest {
 	}
     
     /**
-	 * Tests DECIDE on input that should return true
+	 * Tests DECIDE on input that should return false
 	 * 
 	 * @return Needs to evaluate to false.
 	 */
 	@Test
 	@DisplayName("Tests DECIDE for negative input.")
 	void DECIDENegativeTest() {
-		assertFalse(app.DECIDE(), "DECIDE did not output true when it should");
+        app.params.LENGTH1 = 2;
+        app.params.RADIUS1 = 0.5;
+        app.params.EPSILON = app.params.PI/2;
+        app.params.AREA1 = 2;
+        app.params.Q_PTS = 3;
+        app.params.QUADS = 2;
+        app.params.DIST = 2;
+        app.params.N_PTS = 5;
+        app.params.K_PTS = 2;
+        app.params.A_PTS = 2;
+        app.params.B_PTS = 3;
+        app.params.C_PTS = 2;
+        app.params.D_PTS = 1;
+        app.params.E_PTS = 3;
+        app.params.F_PTS = 3;
+        app.params.G_PTS = 3;
+        app.params.LENGTH2 = 0.2;
+        app.params.RADIUS2 = 0.1;
+        app.params.AREA2 = 0.1;
+		app.inputVariables.POINTS = new Point[] { 
+            new Point(0, 0), new Point(3, 0), new Point(1, 1), // 0 and 1
+            new Point(2, 2), new Point(1, 1), new Point(2, 1), // 2
+            new Point(0, 0), new Point(0, 4), new Point(4, 0), // 3 
+            new Point(1, 1), new Point(-1, 1), new Point(-1, -1), // 4 and 5
+            new Point(0, 0), new Point(1, 1), new Point(2, 4), new Point(4, 0), new Point(4, 1), // 6 and 7
+            new Point(0, 0), new Point(1, 1), new Point(-1, 2), new Point(3, -1), new Point(2, 1), new Point(1, 0), new Point(0, 1), new Point(4, 1), // 8 and 13
+            new Point(1, 1), new Point(4.5, 2), new Point(1, 1), new Point(5.3, 0.1), new Point(2.5, 10), new Point(1, 0), // 9
+            new Point(1, 1), new Point(2, 1), new Point(-1, 2), new Point(3, -1), new Point(-3, -2), new Point(1, 0), new Point(0, 1), new Point(4, 1), new Point(1, -6), new Point(3, 0), // 10 and 14
+            new Point(4, 0), new Point(0.3, 4.3), new Point(4.2, 0.12), new Point(7.6, 0), new Point(2, 0), // 11
+            new Point(0.1, 0), new Point(0.3, 4.3), new Point(4.2, 0.12), new Point(2.5, 0) // 12
+        };
+        app.inputVariables.NUMPOINTS = 50;
+		LogicalConnectorMatrix lcm = new LogicalConnectorMatrix('a');
+        app.inputVariables.LCM = lcm;
+        boolean[] puv = new boolean[15];
+        for (int i = 0; i < 15; i++) {
+            puv[i] = true;
+        }
+        app.inputVariables.PUV = puv;
+
+		assertFalse(app.DECIDE(), "DECIDE did not output false when it should");
 	}
 }
