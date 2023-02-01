@@ -124,7 +124,10 @@ public class DECIDETest {
 	}
     
     /**
-	 * Tests DECIDE on input that should return false
+	 * Tests DECIDE on input and parameters that should NOT result in a launch.
+     * All LICS are true except 12, 13 and 14
+     * The LCM is only AND and the PUV is all true so it should result in
+     * FUV 12, 13 and 14 being false and thus no launch. 
 	 * 
 	 * @return Needs to evaluate to false.
 	 */
