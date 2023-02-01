@@ -120,10 +120,27 @@ public class LICSTest {
 	 */
 	@Test
 	@DisplayName("Tests LIC4 for positive input.")
-	void LIC4PositiveTest() {
+	void LIC4PositiveTest1() {
 		params.Q_PTS = 2;
 		params.QUADS = 1;
 		Point[] points = { new Point(1, 1), new Point(-1, 2), new Point(0.5, 0.5) };
+		globals.POINTS = points;
+		assertTrue(LICS.four(globals, params),
+				"LIC4 should output true when Q_PTS consecutive data points lie in more than QUADS quadrants");
+	}
+
+	/**
+	 * Tests LIC4 condition that if Q_PTS consecutive data points lie in more than
+	 * QUADS quadrants then it should return true. More points.
+	 * 
+	 * @return Needs to evaluate to true.
+	 */
+	@Test
+	@DisplayName("Tests LIC4 for positive input.")
+	void LIC4PositiveTest2() {
+		params.Q_PTS = 2;
+		params.QUADS = 1;
+		Point[] points = { new Point(1, 1), new Point(1, 2), new Point(0.5, 0.5), new Point(1, 1), new Point(-1, -1) };
 		globals.POINTS = points;
 		assertTrue(LICS.four(globals, params),
 				"LIC4 should output true when Q_PTS consecutive data points lie in more than QUADS quadrants");
