@@ -111,11 +111,16 @@ public class DECIDETest {
             new Point(124, 0), new Point(0., 0.), new Point(19.2, 0.121321), new Point(7.6421, 0.6234), new Point(-2.234, -0.312), // 11
             new Point(15.872, 111), new Point(0.3, 762.1456), new Point(14.245, 12431.12), new Point(612.451, -142213.3512) // 12
         };
-		LogicalConnectorMatrix lcm = new LogicalConnectorMatrix();
-		app.inputVariables.LCM = lcm;
         app.inputVariables.NUMPOINTS = 50;
-		assertTrue(app.DECIDE(), "DECIDE did not output true when it should");
+        LogicalConnectorMatrix lcm = new LogicalConnectorMatrix();
+		app.inputVariables.LCM = lcm;
+        boolean[] puv = new boolean[15];
+        for (int i = 0; i < 15; i++) {
+            puv[i] = false;
+        }
+        app.inputVariables.PUV = puv;
 
+		assertTrue(app.DECIDE(), "DECIDE did not output true when it should");
 	}
     
     /**
