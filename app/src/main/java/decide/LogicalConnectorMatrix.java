@@ -38,6 +38,7 @@ public class LogicalConnectorMatrix {
                 else{
                     if(flag == 'r') x = rand.nextInt(3);        //Random
                     else if (flag == 'd') x = (i*(j+1))%3;             //Deterministic, just some matrix
+                    else if (flag == 'a') x = 0;        //ANDD only
                     else x = 1;
                     switch (x){
                         case 0:
